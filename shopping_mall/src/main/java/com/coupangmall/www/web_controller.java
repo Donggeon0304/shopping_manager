@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.coupangmall.www.web_controller.MyData;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -70,5 +74,34 @@ public class web_controller {
 		System.out.println(ja.get(0));
 		System.out.println(ja.get(1));
 		return "ok";
+	}
+	
+	/*@PostMapping("/loginok.do")
+	public String loginok(@RequestParam String mid, HttpServletRequest req) {
+		HttpSession hs = req.getSession();
+		hs.setAttribute("mid", mid);
+		hs.setMaxInactiveInterval(1800);
+		return "/index3";
+	}*/
+	
+	//HttpSession : 세션
+	@PostMapping("/loginok.do")
+	public String loginok(String mid, HttpSession session) {
+		if(mid != null) {
+			session.setAttribute("mid", mid);
+			session.setMaxInactiveInterval(1800);
+		}
+		return "/index3";
+	}
+	
+	@GetMapping("/restapi.do")
+	//@SessionAttribute: 등록되어 있는 session 값을 가져옴
+	public String restapi(@SessionAttribute(name="mid", required = false) String mid) {
+		if(mid==null) {
+			System.out.println("로그인 하세요");
+		}else {
+			System.out.println(mid+"님 환영");			
+		}
+		return "home";
 	}
 }

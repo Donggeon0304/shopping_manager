@@ -4,14 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="./resources/js/index.js"></script>
+<title>Ajax 통신 (배열)</title>
+<script src="./resources/js/jquery.js"></script>
+<script src="./resources/js/index.js?v=<%= System.currentTimeMillis() %>"></script>
 <link rel="stylesheet" type="text/css" href="./resources/css/index.css">
 </head>
 <body>
-메인페이지
-<div class="box"></div>
-<img src="./resources/img/ezreal.jpeg">
-<img src="./resources/img/lol.jpeg">
+<button type="button" id="btn">get_ajax</button>
+<button type="button" id="btn2">post_ajax</button>
+<button type="button" id="btn3">삼번</button>
+<button type="button" id="btn4">응용 ajax data</button>
 </body>
 </html>

@@ -54,7 +54,7 @@ public class web_controller extends md5_pass{
 	public ResponseEntity<JsonNode> ajaxkok2(@RequestBody JsonNode alldata){
 		System.out.println(alldata.toString());
 		return ResponseEntity.ok(alldata);
-	}
+	} 
 	
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")

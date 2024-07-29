@@ -1,0 +1,17 @@
+create table shopping_user(
+uidx int(8) not null auto_increment,
+uid varchar(30) not null,
+upass varchar(30) not null,
+uname varchar(30) not null,
+uemail varchar(100) not null,
+utel varchar(11) not null,
+utel_cop varchar(10) not null,
+uaddress_code varchar(7) not null,
+uaddress varchar(200) not null,
+uaddress_etc varchar(100) not null,
+ujoin_date timestamp not null default current_timestamp,
+primary key(uidx),
+unique (uid),
+unique (uemail),
+unique (utel)
+);

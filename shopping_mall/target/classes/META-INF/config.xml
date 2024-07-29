@@ -3,6 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-<typeAliases>
-</typeAliases>
+	<typeAliases>
+		<typeAlias alias="userdto" type="com.coupangmall.www.user_dto"/>
+		<typeAlias alias="admindto" type="shopping_admin.admin_dto"/>
+	</typeAliases>
+
 </configuration>

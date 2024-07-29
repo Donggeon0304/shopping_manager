@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -24,7 +25,7 @@ import com.coupangmall.www.web_controller.MyData;
 import com.fasterxml.jackson.databind.JsonNode;
 
 @Controller
-public class web_controller {
+public class web_controller extends md5_pass{
 	
 	//ajax통신 CORS 해제
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -103,5 +104,41 @@ public class web_controller {
 			System.out.println(mid+"님 환영");			
 		}
 		return "home";
+	}
+	
+	//@Resource(name="md5pass")
+	//private md5_pass md;
+	
+	//md5 : 회원가입, 로그인, 패스워드변경, 1:1 문의게시판, 자유게시판, 상품구매내역
+	//패스워드 변경 여부 체크(MD5)
+	@GetMapping("/passwd.do")
+	public String passwd() {
+		String pwd = "a1234";
+		String mdpwd = this.md5_making(pwd);
+		System.out.println(mdpwd);
+		return null;
+	}
+	
+	//DTO (@ModelAttribute)
+	@Resource(name="userdao")
+	private user_dao ud;
+	
+	//아이디찾기
+	@PostMapping("/idsearch.do")
+	public String idsearch(String[] uname, String uemail) {
+		user_dto result = ud.search_id(uname[0], uemail);
+		try {
+			System.out.println(result.uid);
+		}catch(Exception e) {
+			System.out.println("고객명 또는 가입이메일이 잘못되었습니다.");
+		}
+		return null;
+	}
+	//패스워드변경
+	@PostMapping("/passmodify.do")
+	public String passmodify(String uid, String[] uname) {
+		user_dto result = ud.search_pw(uid, uname[1]);
+		System.out.println(result.upass);
+		return null;
 	}
 }

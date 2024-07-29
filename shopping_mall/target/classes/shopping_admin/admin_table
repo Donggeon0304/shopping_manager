@@ -1,0 +1,17 @@
+create table shopping_admin(
+aidx int(2) not null auto_increment,
+aid varchar(20) not null,
+apass varchar(20) not null,
+aname varchar(20) not null,
+aemail varchar(100) not null,
+atel varchar(11) not null,
+ateam varchar(20) not null,
+aposition varchar(20) not null,
+ajoin_date timestamp not null default current_timestamp,
+primary key(aidx),
+unique (aid),
+unique (aemail),
+unique (atel)
+);
+
+select * from shopping_admin

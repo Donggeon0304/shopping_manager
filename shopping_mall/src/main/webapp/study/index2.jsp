@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+수정수정
 <form id="frm">
 아이디 : <input type="text" name="mid">
 <input type="button" value="전송" onclick="post_page()">

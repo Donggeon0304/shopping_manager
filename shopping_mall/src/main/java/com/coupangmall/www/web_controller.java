@@ -56,6 +56,7 @@ public class web_controller extends md5_pass{
 		return ResponseEntity.ok(alldata);
 	}
 	
+	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping("/ajaxok3.do")
 	@ResponseBody

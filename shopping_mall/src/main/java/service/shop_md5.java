@@ -1,4 +1,4 @@
-package shopping_module;
+package service;
 
 import java.security.MessageDigest;
 

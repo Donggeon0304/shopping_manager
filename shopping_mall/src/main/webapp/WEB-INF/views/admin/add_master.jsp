@@ -70,7 +70,7 @@
             </ul>
             <span class="admin_addbtn">
                 <button type="button" class="btn_button btncolor1" id="join" title="관리자 등록">관리자 등록</button>
-                <button type="button" class="btn_button btncolor2" title="관리자 취소">등록 취소</button>
+                <button type="button" class="btn_button btncolor2" id="cancel" title="관리자 취소">등록 취소</button>
             </span>
         </div>
     </section>

@@ -12,10 +12,9 @@ $(document).ready(function(){
 				data:{aid:$("#aid").val()},
 				success:function(response){
 					if(response == "ok"){
-						console.log(response);
+						alert("사용가능한 아이디 입니다.");
 						idck = true;
 					}else{
-						console.log(response);
 						alert("이미 사용중인 아이디 입니다.");
 					}
 				}
@@ -47,13 +46,12 @@ $(document).ready(function(){
 		}else{
 			// 폼 데이터를 수집
             var formData = {};
-            $("#frm").find("input[name]").each(function() {
+            $("#frm").find("[name]").each(function() {
                 formData[this.name] = $(this).val();
             });
                 
 			// JSON 문자열로 변환
             var jsonData = JSON.stringify(formData);
-
 			$.ajax({
 				url:'./admin_join.do',
 				type:'post',
@@ -69,8 +67,12 @@ $(document).ready(function(){
 			})		
 		}
 	})
+	
+	$("#cancel").click(() => {
+		location.href="./index";
+	})
 })
 function join(){
 	alert("회원가입을 요청하였습니다.");
-	location.href="./index.jsp";
+	location.href="./index";
 }

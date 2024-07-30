@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	HttpSession hs = request.getSession();
+	if(hs.getAttribute("admin") != null){
+		out.print("<script>location.href='./admin_list.do';</script>");
+	}
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,7 +15,7 @@
     <title>관리자 페이지</title>
     <script src="../resources/js/jquery.js"></script>
     <link rel="stylesheet" type="text/css" href="../resources/css/basic.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/mainlogin.css?v=3">
+    <link rel="stylesheet" type="text/css" href="../resources/css/mainlogin.css?v=4">
     <link rel="icon" href="../resources/img/logo.png" sizes="128x128">
     <link rel="icon" href="../resources/img/logo.png" sizes="64x64">
     <link rel="icon" href="../resources/img/logo.png" sizes="32x32">

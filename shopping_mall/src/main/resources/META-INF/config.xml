@@ -5,7 +5,10 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="userdto" type="com.coupangmall.www.user_dto"/>
-		<typeAlias alias="admindto" type="shopping_admin.admin_dto"/>
+		<typeAlias alias="admindto" type="dto.admin_dto"/>
+		<typeAlias alias="shoppingdto" type="dto.shopping_dto"/>
+		<typeAlias alias="siteinfodto" type="dto.siteinfo_dto"/>
+		<typeAlias alias="paydto" type="dto.pay_dto"/>
 	</typeAliases>
 
 </configuration>

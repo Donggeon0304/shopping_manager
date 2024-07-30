@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%
 	HttpSession hs = request.getSession();
-	if(hs.getAttribute("admin")==null){
-		hs.setAttribute("admin", "로그인하세요");
+	if(hs.getAttribute("admin")==null || hs.getAttribute("admin")==""){
+		out.print("<script>alert('비정상적인 접근입니다.'); location.href='./index';</script>");
 	}
 %>
 <script src="../resources/js/jquery.js"></script>
@@ -14,10 +14,10 @@
     </div>
 </header>
 <script>
-$(function(){
+$(()=>{
 	$("#logout").click(function(){
 		$.ajax({
-			url:"/admin/admin_logout.do",
+			url:"/admin/admin_logout.do?ck=y",
 			type:"GET",
 			success:function(response){
 				reload();
@@ -29,6 +29,6 @@ $(function(){
 	})
 })
 function reload(){
-	location.href="./index.jsp";
+	location.href="./index";
 }
 </script>

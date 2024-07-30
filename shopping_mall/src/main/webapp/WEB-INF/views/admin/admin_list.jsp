@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>관리자 등록 페이지</title>
+    <title>쇼핑몰 관리자 리스트</title>
     <link rel="stylesheet" type="text/css" href="../resources/css/basic.css">
     <link rel="stylesheet" type="text/css" href="../resources/css/login.css?v=1">
     <link rel="stylesheet" type="text/css" href="../resources/css/main.css?v=1">
@@ -32,27 +33,38 @@
         <li>가입일자</li>
         <li>승인여부</li>
     </ol>
+    <c:if test="${result==null }">
     <ol class="new_admin_none">
         <li>신규 등록된 관리자가 없습니다.</li>
     </ol>
+    </c:if>
+    <c:forEach var="list" items="${result}" varStatus="status">
     <ol class="new_admin_lists2">
-        <li>1</li>
-        <li>한석봉</li>
-        <li>hansbong</li>
-        <li>01012345678</li>
-        <li>hansbong@hanmail.net</li>
-        <li>디자인팀</li>
-        <li>주임</li>
-        <li>2024-07-29</li>
+        <li>${status.index+1}</li>
+        <li>${list.aname}</li>
+        <li>${list.aid}</li>
+        <li>${list.atel}</li>
+        <li>${list.aemail}</li>
+        <li>${list.ateam}</li>
+        <li>${list.aposition}</li>
+        <li>${list.ajoin_date}</li>
         <li>
-            <input type="button" value="승인" class="new_addbtn1" title="승인">
-            <input type="button" value="미승인" class="new_addbtn2" title="미승인">
+        	<c:choose>
+	        	<c:when test="${list.ause == 'N' }">
+	            <input type="button" value="승인" class="new_addbtn1" title="승인" data-aidx="${list.aidx}">
+	            </c:when>
+	            <c:otherwise>
+	            <input type="button" value="미승인" class="new_addbtn2" title="미승인" data-aidx="${list.aidx}">
+	            </c:otherwise>
+            </c:choose>
         </li>
     </ol>
+    </c:forEach>
 </section>
 <section></section>
 <section></section>
 </main>
 <%@include file="../copyright.jsp" %>
 </body>
+<script src="../resources/js/admin_list.js?v=<%= System.currentTimeMillis() %>"></script>
 </html>

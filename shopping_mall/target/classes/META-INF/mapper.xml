@@ -17,11 +17,37 @@ select * from user
 </choose>
 </select>
 
+<!-- shopping_admin -->
 <insert id="insert">
-insert into shopping_admin values ('0',#{aid},#{apass},#{aname},#{aemail},#{atel},#{ateam},#{aposition},now())
+insert into shopping_admin values ('0',#{aid},#{apass},#{aname},#{aemail},#{atel},#{ateam},#{aposition},#{ause},now())
 </insert>
 
-<select id="idck">
-select count(*) as ctn from shopping_admin where aid=#{aid}
+<select id="idck" resultType="admindto">
+select * from shopping_admin where aid=#{aid}
+</select>
+
+<select id="select" resultType="admindto">
+select * from shopping_admin order by aidx desc
+</select>
+
+<update id="update">
+update shopping_admin set ause=#{ause} where aidx=#{aidx}
+</update>
+
+<!-- siteinfo -->
+<insert id="site_insert">
+insert into siteinfo values ('0',#{page_name},#{admin_email},#{point_use},#{join_point},#{join_level},#{com_name},#{business_num},#{ceo_name},#{ceo_tel},#{mob_num},#{vat_num},#{com_post},#{com_address},#{info_name},#{info_email})
+</insert>
+
+<insert id="pay_insert">
+insert into pay values ('0',#{bank},#{account_num},#{card_use},#{phone_use},#{giftcard_use},#{min_point},#{max_point},#{cash_receipt},#{deli_name},#{deli_price},#{deli_date})
+</insert>
+
+<select id="site_select" resultType="siteinfodto">
+select * from siteinfo
+</select>
+
+<select id="pay_select" resultType="paydto">
+select * from pay
 </select>
 </mapper>

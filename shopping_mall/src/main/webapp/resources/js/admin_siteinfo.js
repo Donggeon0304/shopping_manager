@@ -12,15 +12,44 @@ document.addEventListener("DOMContentLoaded", function() {
         // 폼 데이터 검사
         var firstInvalidField = null;
         formElements.forEach(function(element) {
+			var name = element.name;
+			var value = element.value.trim();
             if (element.type === "text" && !element.value.trim()) {
-                if (!firstInvalidField) {
-                    firstInvalidField = element;
-                }
-                return; // 첫 번째 비어 있는 입력값을 찾으면 검사 종료
+				if(!element.value.trim()){
+	                if (!firstInvalidField) {
+	                    firstInvalidField = element;
+						firstInvalidFieldName = name;
+	                }
+	                return; // 첫 번째 비어 있는 입력값을 찾으면 검사 종료
+				}					
             }
+			
+			if (name === "pay_dto.min_point") {
+                var minPointValue = parseInt(value, 10);
+                if (isNaN(minPointValue) || minPointValue < 1000) {
+                    if (!firstInvalidField) {
+                        firstInvalidField = element;
+                        firstInvalidFieldName = name+1;
+	                    return; // 첫 번째 유효하지 않은 입력값을 찾으면 검사 종료
+                    }
+                }
+            }
+
+			if (name === "pay_dto.max_point") {
+                var minPointValue = parseInt(value, 10);
+                if (isNaN(minPointValue) || minPointValue < 1000) {
+                    if (!firstInvalidField) {
+                        firstInvalidField = element;
+                        firstInvalidFieldName = name+1;
+	                    return; // 첫 번째 유효하지 않은 입력값을 찾으면 검사 종료
+                    }
+                }
+            }
+
             if (element.type === "radio" && !document.querySelector(`input[name="${element.name}"]:checked`)) {
                 if (!firstInvalidField) {
                     firstInvalidField = element;
+					firstInvalidFieldName = name;
                 }
                 return; // 첫 번째 비어 있는 입력값을 찾으면 검사 종료
             }
@@ -28,73 +57,113 @@ document.addEventListener("DOMContentLoaded", function() {
         
         // 첫 번째 비어 있는 필드가 있을 경우 경고 메시지 출력
         if (firstInvalidField) {
-            alert(getAlertMessage(firstInvalidField.name));
+            alert(getAlertMessage(firstInvalidFieldName));
             event.preventDefault(); // 폼의 기본 제출 동작을 막음
         } else {
-            // 유효성 검사 통과 시 폼 제출 로직 추가
-            console.log("폼 데이터가 유효합니다. 제출합니다.");
-            frm.method="post";
-			frm.action="./siteinfo.do";
-			frm.submit();
+			var formData = {};
+            $("#frm").find("[name]").each(function() {
+				var name = this.name;
+			    var value = $(this).val();
+
+			    var names = name.split('.');
+			    if (names.length === 2) {
+					if (!formData[names[0]]) {
+			            formData[names[0]] = {};
+			        }
+			        formData[names[0]][names[1]] = value;
+			    } else {
+			        formData[name] = value;
+			    }
+            });
+
+            fetch('./siteinsert.do',{
+				method:'POST',
+				headers: {
+			            'Content-Type': 'application/json'
+			        },
+			    body: JSON.stringify(formData)
+			})
+			.then(response => {
+				return response.text();
+			})
+   			.then(data => {
+				if(data == "ok"){
+			        alert('저장 되었습니다.');
+					repage();					
+				}else{
+					alert('저장에 실패하였습니다.');
+				}
+		    })
+		    .catch(error => {
+		        console.error('Error:', error);
+		    });
         }
     });
 
+	function repage(){
+		window.location.reload();
+	}
+
     function getAlertMessage(name) {
-        switch (name) {
-            case "page_name":
-                return "홈페이지 제목을 입력해 주세요.";
-            case "admin_email":
-                return "관리자 메일 주소를 입력해 주세요.";
-            case "point_use":
-                return "포인트 사용 여부를 선택해 주세요.";
-            case "join_point":
-                return "회원가입 시 적립금을 입력해 주세요.";
-            case "join_level":
-                return "회원가입 시 권한 레벨을 입력해 주세요.";
-            case "com_name":
-                return "회사명을 입력해 주세요.";
-            case "business_num":
-                return "사업자 등록번호를 입력해 주세요.";
-            case "ceo_name":
-                return "대표자명을 입력해 주세요.";
-            case "ceo_tel":
-                return "대표 전화번호를 입력해 주세요.";
-            case "mob_num":
-                return "통신판매업 신고번호를 입력해 주세요.";
-            case "vat_num":
-                return "부가통신 사업자번호를 입력해 주세요.";
-            case "com_post":
-                return "사업장 우편번호를 입력해 주세요.";
-            case "com_address":
-                return "사업장 주소를 입력해 주세요.";
-            case "info_name":
-                return "정보관리 책임자명을 입력해 주세요.";
-            case "info_email":
-                return "정보 책임자 E-mail을 입력해 주세요.";
-            case "bank_name":
-                return "무통장 은행을 입력해 주세요.";
-            case "account_number":
-                return "은행 계좌번호를 입력해 주세요.";
-            case "credit_card_use":
-                return "신용카드 결제 사용 여부를 선택해 주세요.";
-            case "mobile_payment_use":
-                return "휴대폰 결제 사용 여부를 선택해 주세요.";
-            case "book_coupon_use":
-                return "도서상품권 결제 사용 여부를 선택해 주세요.";
-            case "min_point":
-                return "결제 최소 포인트를 입력해 주세요.";
-            case "max_point":
-                return "결제 최대 포인트를 입력해 주세요.";
-            case "cash_receipt_use":
-                return "현금 영수증 발급 사용 여부를 선택해 주세요.";
-            case "delivery_company":
-                return "배송업체명을 입력해 주세요.";
-            case "delivery_fee":
-                return "배송비 가격을 입력해 주세요.";
-            case "preferred_delivery_date":
-                return "희망 배송일 사용 여부를 선택해 주세요.";
-            default:
-                return "입력값을 확인해 주세요.";
-        }
-    }
+	    switch (name) {
+	        // siteinfo_dto 필드
+	        case "siteinfo_dto.page_name":
+	            return "홈페이지 제목을 입력해 주세요.";
+	        case "siteinfo_dto.admin_email":
+	            return "관리자 메일 주소를 입력해 주세요.";
+	        case "siteinfo_dto.point_use":
+	            return "포인트 사용 여부를 선택해 주세요.";
+	        case "siteinfo_dto.join_point":
+	            return "회원가입 시 적립금을 입력해 주세요.";
+	        case "siteinfo_dto.join_level":
+	            return "회원가입 시 권한 레벨을 입력해 주세요.";
+	        case "siteinfo_dto.com_name":
+	            return "회사명을 입력해 주세요.";
+	        case "siteinfo_dto.business_num":
+	            return "사업자 등록번호를 입력해 주세요.";
+	        case "siteinfo_dto.ceo_name":
+	            return "대표자명을 입력해 주세요.";
+	        case "siteinfo_dto.ceo_tel":
+	            return "대표 전화번호를 입력해 주세요.";
+	        case "siteinfo_dto.com_post":
+	            return "사업장 우편번호를 입력해 주세요.";
+	        case "siteinfo_dto.com_address":
+	            return "사업장 주소를 입력해 주세요.";
+	        case "siteinfo_dto.info_name":
+	            return "정보관리 책임자명을 입력해 주세요.";
+	        case "siteinfo_dto.info_email":
+	            return "정보 책임자 E-mail을 입력해 주세요.";
+	
+	        // pay_dto 필드
+	        case "pay_dto.bank":
+	            return "무통장 은행을 입력해 주세요.";
+	        case "pay_dto.account_num":
+	            return "은행 계좌번호를 입력해 주세요.";
+	        case "pay_dto.card_use":
+	            return "신용카드 결제 사용 여부를 선택해 주세요.";
+	        case "pay_dto.phone_use":
+	            return "휴대폰 결제 사용 여부를 선택해 주세요.";
+	        case "pay_dto.giftcard_use":
+	            return "도서상품권 결제 사용 여부를 선택해 주세요.";
+	        case "pay_dto.min_point":
+	            return "결제 최소 포인트를 입력해 주세요.";
+			case "pay_dto.min_point1":
+				return "결제 최소 포인트는 1000이상만 가능합니다.";
+	        case "pay_dto.max_point":
+	            return "결제 최대 포인트를 입력해 주세요.";
+	        case "pay_dto.cash_receipt":
+	            return "현금 영수증 발급 사용 여부를 선택해 주세요.";
+	        case "pay_dto.deli_name":
+	            return "배송업체명을 입력해 주세요.";
+	        case "pay_dto.deli_price":
+	            return "배송비 가격을 입력해 주세요.";
+	        case "pay_dto.deli_date":
+	            return "희망 배송일 사용 여부를 선택해 주세요.";
+	
+	        default:
+	            return "입력값을 확인해 주세요.";
+	    }
+	}
+	
+	
 });

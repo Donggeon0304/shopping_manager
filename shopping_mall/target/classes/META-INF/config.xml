@@ -4,11 +4,9 @@
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias alias="userdto" type="com.coupangmall.www.user_dto"/>
 		<typeAlias alias="admindto" type="dto.admin_dto"/>
-		<typeAlias alias="shoppingdto" type="dto.shopping_dto"/>
 		<typeAlias alias="siteinfodto" type="dto.siteinfo_dto"/>
 		<typeAlias alias="paydto" type="dto.pay_dto"/>
+		<typeAlias alias="sitepaydto" type="dto.sitepay_dto"/>
 	</typeAliases>
-
 </configuration>

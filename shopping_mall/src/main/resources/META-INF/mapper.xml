@@ -1,53 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="shopping_mall">
-
-<select id="search" parameterType="Map" resultType="userdto">
-select * from user
-<choose><!-- 여러가지 형태의 쿼리문을 사용시 적용하는 태그 where+if => choose 개선된 형태 -->
-	<when test="part==1"> <!-- 아이디 찾기 -->
-		where uname=#{uname} and uemail=#{uemail}
-	</when>
-	<when test="part==2"> <!-- 패스워드 찾기 -->
-		where uid=#{uid} and uname=#{uname}
-	</when>
-	<otherwise>
-		order by uidx desc;
-	</otherwise>
-</choose>
-</select>
+<mapper namespace="mapper.shopping_mapper">
 
 <!-- shopping_admin -->
-<insert id="insert">
+<insert id="admin_insert">
 insert into shopping_admin values ('0',#{aid},#{apass},#{aname},#{aemail},#{atel},#{ateam},#{aposition},#{ause},now())
 </insert>
 
-<select id="idck" resultType="admindto">
-select * from shopping_admin where aid=#{aid}
+<select id="admin_selectOne" resultType="admindto">
+select * from shopping_admin where aid = #{aid}
 </select>
 
-<select id="select" resultType="admindto">
+<select id="admin_idcheck" resultType="int">
+select count(*) from shopping_admin where aid=#{param1}
+</select>
+
+<select id="admin_select" resultType="admindto">
 select * from shopping_admin order by aidx desc
 </select>
 
-<update id="update">
+<update id="admin_update">
 update shopping_admin set ause=#{ause} where aidx=#{aidx}
 </update>
 
-<!-- siteinfo -->
+<!-- siteinfo-->
 <insert id="site_insert">
 insert into siteinfo values ('0',#{page_name},#{admin_email},#{point_use},#{join_point},#{join_level},#{com_name},#{business_num},#{ceo_name},#{ceo_tel},#{mob_num},#{vat_num},#{com_post},#{com_address},#{info_name},#{info_email})
-</insert>
-
-<insert id="pay_insert">
-insert into pay values ('0',#{bank},#{account_num},#{card_use},#{phone_use},#{giftcard_use},#{min_point},#{max_point},#{cash_receipt},#{deli_name},#{deli_price},#{deli_date})
 </insert>
 
 <select id="site_select" resultType="siteinfodto">
 select * from siteinfo
 </select>
 
+<select id="site_selectOne" resultType="int">
+select count(*) from siteinfo
+</select>
+
+<update id="site_update">
+update siteinfo set 
+page_name=#{page_name}, admin_email=#{admin_email}, point_use=#{point_use}, join_point=#{join_point}, 
+join_level=#{join_level}, com_name=#{com_name}, business_num=#{business_num}, ceo_name=#{ceo_name}, 
+ceo_tel=#{ceo_tel}, mob_num=#{mob_num}, vat_num=#{vat_num}, com_post=#{com_post}, com_address=#{com_address}, 
+info_name=#{info_name}, info_email=#{info_email}
+</update>
+
+<!-- pay -->
+<insert id="pay_insert">
+insert into pay values ('0',#{bank},#{account_num},#{card_use},#{phone_use},#{giftcard_use},#{min_point},#{max_point},#{cash_receipt},#{deli_name},#{deli_price},#{deli_date})
+</insert>
+
 <select id="pay_select" resultType="paydto">
 select * from pay
 </select>
+
+<update id="pay_update">
+update pay set 
+bank=#{bank}, account_num=#{account_num}, card_use=#{card_use}, phone_use=#{phone_use}, giftcard_use=#{giftcard_use}, 
+min_point=#{min_point}, max_point=#{max_point}, cash_receipt=#{cash_receipt}, deli_name=#{deli_name}, deli_price=#{deli_price}, deli_date=#{deli_date}
+</update>
+
 </mapper>

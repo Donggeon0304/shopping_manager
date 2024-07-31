@@ -1,13 +1,11 @@
-package com.coupangmall.www;
+package service;
 
 import java.security.MessageDigest;
 
 import org.springframework.stereotype.Repository;
 
-//패스워드를 md5형태로 변환하는 메소드
-
-//@Repository("md5pass")
-abstract class md5_pass {
+@Repository("md5pass")
+public class md5_service {
 	
 	public String md5_making(String upass) {
 		StringBuilder sb = new StringBuilder();

@@ -9,7 +9,7 @@
 <script src="../resources/js/jquery.js"></script>
 <header class="headercss">
     <div class="header_div">
-        <p><img src="../resources/img/logo.png" class="logo_sm"> ADMINISTRATOR</p>
+        <p><img src="../resources/img/logo.png" class="logo_sm"><a href="../admin/main.do"> ADMINISTRATOR</a></p>
         <p><%=hs.getAttribute("admin") %> <a href="#">[개인정보 수정]</a> <a href="#" id="logout">[로그아웃]</a></p>
     </div>
 </header>

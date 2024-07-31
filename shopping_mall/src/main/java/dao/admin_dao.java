@@ -10,17 +10,17 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import dto.admin_dto;
-import service.shop_md5;
+import service.md5_service;
 
 @Repository("admindao")
 public class admin_dao {
-	
-	@Resource(name="template2")
+	/*
+	@Resource(name="template")
 	private SqlSessionTemplate tp;
 	
 	//회원가입
 	public String admin_insert(admin_dto at) {
-		String apass = new shop_md5().md5_making(at.getApass());
+		String apass = new md5_service().md5_making(at.getApass());
 		at.setApass(apass);
 		String atel = at.getAtel();
 		atel = atel.replaceAll(",", "");
@@ -79,4 +79,5 @@ public class admin_dao {
 			return "no";
 		}
 	}
+	*/
 }

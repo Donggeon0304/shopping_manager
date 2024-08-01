@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -50,23 +51,31 @@
         <li>품절</li>
         <li>관리</li>
     </ul>
-    <ul>
-        <li><input type="checkbox"></li>
-        <li>상품코드</li>
-        <li>이미지</li>
-        <li>상품명</li>
-        <li>카테고리 분류</li>
-        <li>34,000</li>
-        <li>30,000</li>
-        <li>11%</li>
-        <li>100</li>
-        <li>Y</li>
-        <li>N</li>
-        <li>관리</li>
-    </ul>
-    <ul>
-        <li style="width: 100%;">등록된 상품이 없습니다.</li>
-    </ul>
+   	<c:choose>
+	   	<c:when test="${not empty data}">
+		   	<c:forEach var="product" items="${data}"> 
+			    <ul>
+			        <li><input type="checkbox"></li>
+			        <li>상품코드</li>
+			        <li>이미지</li>
+			        <li>상품명</li>
+			        <li>카테고리 분류</li>
+			        <li>34,000</li>
+			        <li>30,000</li>
+			        <li>11%</li>
+			        <li>100</li>
+			        <li>Y</li>
+			        <li>N</li>
+			        <li>관리</li>
+			    </ul>
+		    </c:forEach>
+	    </c:when>
+	    <c:otherwise>
+		    <ul>
+		        <li style="width: 100%;">등록된 상품이 없습니다.</li>
+		    </ul>
+	    </c:otherwise>
+    </c:choose>
 </div>
 <div class="subpage_view3">
     <ul class="pageing">
@@ -86,11 +95,7 @@
 </div>
 </section>
 </main>
-<footer class="main_copyright">
-    <div>
-        Copyright ⓒ 2024 shopbag All rights reserved.
-    </div>
-</footer>
+<%@include file="../copyright.jsp" %>
 </body>
 <script src="../resources/js/product_list.js?v=<%= System.currentTimeMillis() %>"></script>
 </html>

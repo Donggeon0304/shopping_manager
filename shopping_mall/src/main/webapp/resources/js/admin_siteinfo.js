@@ -6,10 +6,8 @@ $(document).ready(()=>{
 
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelector(".sub_btn1").addEventListener("click", function(event) {
-        // 폼 요소 가져오기
         var formElements = document.querySelectorAll(".info_form input, .info_form2 input");
         
-        // 폼 데이터 검사
         var firstInvalidField = null;
         formElements.forEach(function(element) {
 			var name = element.name;
@@ -20,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	                    firstInvalidField = element;
 						firstInvalidFieldName = name;
 	                }
-	                return; // 첫 번째 비어 있는 입력값을 찾으면 검사 종료
+	                return;
 				}					
             }
 			
@@ -30,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     if (!firstInvalidField) {
                         firstInvalidField = element;
                         firstInvalidFieldName = name+1;
-	                    return; // 첫 번째 유효하지 않은 입력값을 찾으면 검사 종료
+	                    return;
                     }
                 }
             }
@@ -41,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     if (!firstInvalidField) {
                         firstInvalidField = element;
                         firstInvalidFieldName = name+1;
-	                    return; // 첫 번째 유효하지 않은 입력값을 찾으면 검사 종료
+	                    return;
                     }
                 }
             }
@@ -51,11 +49,10 @@ document.addEventListener("DOMContentLoaded", function() {
                     firstInvalidField = element;
 					firstInvalidFieldName = name;
                 }
-                return; // 첫 번째 비어 있는 입력값을 찾으면 검사 종료
+                return;
             }
         });
         
-        // 첫 번째 비어 있는 필드가 있을 경우 경고 메시지 출력
         if (firstInvalidField) {
             alert(getAlertMessage(firstInvalidFieldName));
             event.preventDefault(); // 폼의 기본 제출 동작을 막음
@@ -106,7 +103,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function getAlertMessage(name) {
 	    switch (name) {
-	        // siteinfo_dto 필드
 	        case "siteinfo_dto.page_name":
 	            return "홈페이지 제목을 입력해 주세요.";
 	        case "siteinfo_dto.admin_email":
@@ -134,7 +130,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	        case "siteinfo_dto.info_email":
 	            return "정보 책임자 E-mail을 입력해 주세요.";
 	
-	        // pay_dto 필드
 	        case "pay_dto.bank":
 	            return "무통장 은행을 입력해 주세요.";
 	        case "pay_dto.account_num":
@@ -164,6 +159,4 @@ document.addEventListener("DOMContentLoaded", function() {
 	            return "입력값을 확인해 주세요.";
 	    }
 	}
-	
-	
 });

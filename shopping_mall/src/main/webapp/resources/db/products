@@ -1,0 +1,16 @@
+create table products(
+pidx int(7) not null auto_increment,
+cate varchar(10) not null,
+pcode varchar(10) not null,
+pname varchar(200) not null,
+padd_text text null,
+price varchar(7) not null,
+pdc_per varchar(3) not null,
+pdc_price varchar(7) not null,
+psold_out varchar(5) not null,
+puse varchar(1) not null,
+ptext text not null,
+pdate timestamp not null default current_timestamp,
+primary key(pidx),
+unique (pcode)
+);

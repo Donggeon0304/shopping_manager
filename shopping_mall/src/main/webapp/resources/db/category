@@ -1,0 +1,9 @@
+create table category(
+cidx int(5) not null auto_increment,
+cf_code varchar(6) not null,
+lm_code varchar(6) not null,
+lm_name varchar(30) not null,
+cuse varchar(1) not null,
+primary key(cidx),
+unique (lm_name)
+);

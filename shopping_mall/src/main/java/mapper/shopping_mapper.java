@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import dto.admin_dto;
+import dto.cate_dto;
 import dto.pay_dto;
 import dto.siteinfo_dto;
 
@@ -25,4 +26,8 @@ public interface shopping_mapper {
     int pay_insert(pay_dto dto);
     pay_dto pay_select();
     int pay_update(pay_dto dto);
+    
+    int cate_insert(cate_dto dto);
+    List<cate_dto> cate_select();
+    int cate_delete(List<String> cidx);
 }

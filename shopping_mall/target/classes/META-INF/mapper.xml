@@ -59,4 +59,23 @@ bank=#{bank}, account_num=#{account_num}, card_use=#{card_use}, phone_use=#{phon
 min_point=#{min_point}, max_point=#{max_point}, cash_receipt=#{cash_receipt}, deli_name=#{deli_name}, deli_price=#{deli_price}, deli_date=#{deli_date}
 </update>
 
+<!-- category -->
+<insert id="cate_insert">
+insert into category values ('0',#{cf_code},#{lm_code},#{lm_name},#{cuse},now())
+</insert>
+
+<select id="cate_select" resultType="catedto">
+select * from category order by cidx desc
+</select>
+
+<delete id="cate_delete" parameterType="list">
+delete from category
+where cidx in
+<foreach item="cidx" collection="list" open="(" separator="," close=")">
+	#{cidx}
+</foreach>
+</delete>
+
+<!-- products -->
+
 </mapper>

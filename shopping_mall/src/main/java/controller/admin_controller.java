@@ -57,11 +57,9 @@ public class admin_controller {
 	//관리자 로그아웃
 	@GetMapping("/admin_logout.do")
 	@ResponseBody
-	public String admin_logout(HttpServletRequest req, HttpServletResponse res,String ck) throws Exception {
-		HttpSession hs = req.getSession(false);
-
+	public String admin_logout(HttpSession hs, HttpServletResponse res,String ck) throws Exception {
 	    if (hs == null || hs.getAttribute("admin") == null|| ck==null) {
-	        res.sendRedirect("/admin/index.jsp");
+	        res.sendRedirect("/admin/index");
 	        return null;
 	    }else {
 	    	hs.removeAttribute("admin");

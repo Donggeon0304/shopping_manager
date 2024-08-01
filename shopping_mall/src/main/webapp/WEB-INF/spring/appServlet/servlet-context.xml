@@ -28,7 +28,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="model, service, dao, dto, controller" />
+	<context:component-scan base-package="model, service, dto, controller" />
 	
 	<mybatis-spring:scan base-package="mapper"/>
 		

@@ -8,5 +8,7 @@
 		<typeAlias alias="siteinfodto" type="dto.siteinfo_dto"/>
 		<typeAlias alias="paydto" type="dto.pay_dto"/>
 		<typeAlias alias="sitepaydto" type="dto.sitepay_dto"/>
+		<typeAlias alias="catedto" type="dto.cate_dto"/>
+		<typeAlias alias="productsdto" type="dto.products_dto"/>
 	</typeAliases>
 </configuration>

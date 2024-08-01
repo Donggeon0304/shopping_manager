@@ -193,11 +193,7 @@
     </main>
 </form>
 
-<footer class="main_copyright">
-    <div>
-        Copyright ⓒ 2024 shopbag All rights reserved.
-    </div>
-</footer>
+<%@include file="../copyright.jsp" %>
 </body>
 <script src="../resources/js/admin_siteinfo.js?v=<%= System.currentTimeMillis() %>"></script>
 </html>

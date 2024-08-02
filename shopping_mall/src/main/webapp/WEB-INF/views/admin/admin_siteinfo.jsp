@@ -115,11 +115,11 @@
                 <ul class="info_form2">
                     <li>무통장 은행</li>
                     <li>
-                        <input type="text" name="pay_dto.bank" class="in_form0" value="${pay.bank != null ? pay.bank : '' }"> 
+                        <input type="text" id="pay_dto.bank" name="pay_dto.bank" class="in_form0" value="${pay.bank != null ? pay.bank : '' }"> 
                     </li>
                     <li>은행계좌번호</li>
                     <li>
-                        <input type="text" name="pay_dto.account_num" class="in_form1" value="${pay.account_num != null ? pay.account_num : '' }"> 
+                        <input type="text" id="pay_dto.account_num" name="pay_dto.account_num" class="in_form1" value="${pay.account_num != null ? pay.account_num : '' }"> 
                     </li>
                 </ul>
                 <ul class="info_form">
@@ -149,7 +149,7 @@
                 <ul class="info_form2">
                     <li>결제 최소 포인트</li>
                     <li>
-                        <input type="text" name="pay_dto.min_point" class="in_form0" maxlength="5" value="${pay.min_point != null ? pay.min_point : '' }"> 점
+                        <input type="text" id="pay_dto.min_point" name="pay_dto.min_point" class="in_form0" maxlength="5" value="${pay.min_point != null ? pay.min_point : '' }"> 점
                     </li>
                     <li>결제 최대 포인트</li>
                     <li>

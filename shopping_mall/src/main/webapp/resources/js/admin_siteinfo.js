@@ -11,19 +11,37 @@ document.addEventListener("DOMContentLoaded", function() {
         var firstInvalidField = null;
         formElements.forEach(function(element) {
 			var name = element.name;
-			var value = element.value.trim();
-            if (element.type === "text" && !element.value.trim()) {
-				if(!element.value.trim()){
-	                if (!firstInvalidField) {
-	                    firstInvalidField = element;
-						firstInvalidFieldName = name;
-	                }
-	                return;
-				}					
+			var values = element.value.trim();
+			if(name!='siteinfo_dto.mob_num' && name!='siteinfo_dto.vat_num'){
+				if(name!='pay_dto.account_num' && name!='pay_dto.bank'){
+					if (element.type === "text" && !element.value.trim()){
+			            if (!firstInvalidField) {
+			                firstInvalidField = element;
+							firstInvalidFieldName = name;
+			            }
+			            return;
+					}				
+				}else{
+					var bank = document.getElementById('pay_dto.bank').value;
+					var account = document.getElementById('pay_dto.account_num').value;
+					if(account == '' && bank != ''){
+						if (!firstInvalidField) {
+			                    firstInvalidField = element;
+								firstInvalidFieldName = "must_account";
+			            }
+			            return;
+					}else if(bank == '' && account != ''){
+						if (!firstInvalidField) {
+			                    firstInvalidField = element;
+								firstInvalidFieldName = "must_bank";
+			            }
+			            return;
+					}
+				}
             }
 			
 			if (name === "pay_dto.min_point") {
-                var minPointValue = parseInt(value, 10);
+                var minPointValue = parseInt(values, 10);
                 if (isNaN(minPointValue) || minPointValue < 1000) {
                     if (!firstInvalidField) {
                         firstInvalidField = element;
@@ -34,8 +52,10 @@ document.addEventListener("DOMContentLoaded", function() {
             }
 
 			if (name === "pay_dto.max_point") {
-                var minPointValue = parseInt(value, 10);
-                if (isNaN(minPointValue) || minPointValue < 1000) {
+				var min = document.getElementById("pay_dto.min_point").value;
+                var minPointValue = parseInt(min, 10);
+                var maxPointValue = parseInt(values, 10);
+                if (isNaN(maxPointValue) || maxPointValue <= minPointValue) {
                     if (!firstInvalidField) {
                         firstInvalidField = element;
                         firstInvalidFieldName = name+1;
@@ -60,16 +80,16 @@ document.addEventListener("DOMContentLoaded", function() {
 			var formData = {};
             $("#frm").find("[name]").each(function() {
 				var name = this.name;
-			    var value = $(this).val();
+			    var values = $(this).val();
 
 			    var names = name.split('.');
 			    if (names.length === 2) {
 					if (!formData[names[0]]) {
 			            formData[names[0]] = {};
 			        }
-			        formData[names[0]][names[1]] = value;
+			        formData[names[0]][names[1]] = values;
 			    } else {
-			        formData[name] = value;
+			        formData[name] = values;
 			    }
             });
 
@@ -130,10 +150,10 @@ document.addEventListener("DOMContentLoaded", function() {
 	        case "siteinfo_dto.info_email":
 	            return "정보 책임자 E-mail을 입력해 주세요.";
 	
-	        case "pay_dto.bank":
-	            return "무통장 은행을 입력해 주세요.";
-	        case "pay_dto.account_num":
-	            return "은행 계좌번호를 입력해 주세요.";
+	        case "must_bank":
+	            return "은행 계좌번호를 작성하신 경우 무통장 은행은 필수 입니다.";
+			case "must_account":
+	            return "무통장 은행을 작성하신 경우 은행 계좌번호는 필수 입니다.";
 	        case "pay_dto.card_use":
 	            return "신용카드 결제 사용 여부를 선택해 주세요.";
 	        case "pay_dto.phone_use":
@@ -146,6 +166,8 @@ document.addEventListener("DOMContentLoaded", function() {
 				return "결제 최소 포인트는 1000이상만 가능합니다.";
 	        case "pay_dto.max_point":
 	            return "결제 최대 포인트를 입력해 주세요.";
+			case "pay_dto.max_point1":
+				return "결제 최대 포인트는 결제 최소 포인트보다 커야합니다.";
 	        case "pay_dto.cash_receipt":
 	            return "현금 영수증 발급 사용 여부를 선택해 주세요.";
 	        case "pay_dto.deli_name":

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mapper.shopping_mapper">
+<mapper namespace="mapper.ShoppingMapper">
 
 <!-- shopping_admin -->
 <insert id="admin_insert">
@@ -77,5 +77,24 @@ where cidx in
 </delete>
 
 <!-- products -->
+<insert id="products_insert">
+insert into products values ('0',#{cate},#{pcode},#{pname},#{padd_text},#{price},#{pdc_per},#{pdc_price},#{pstock},#{puse},#{psold_out},#{ptext},now())
+</insert>
+
+<insert id="productFile_insert">
+insert into product_file values ('0',#{pidx},#{mfile_name},#{mfile_url},#{file1_name},#{file1_url},#{file2_name},#{file2_url})
+</insert>
+
+<select id="products_pidx" resultType="int">
+select pidx from products order by pidx desc limit 1
+</select>
+
+<select id="products_select" resultType="productsdto">
+select * from products order by pidx desc
+</select>
+
+<select id="product_file_select" resultType="productsdto">
+select * from product_file order by pidx desc
+</select>
 
 </mapper>

@@ -9,6 +9,7 @@
             <li title="쇼핑몰 회원관리">쇼핑몰 회원관리</li>
             <li title="쇼핑몰 상품관리" onclick="product()">쇼핑몰 상품관리</li>
             <li title="쇼핑몰 기본설정" onclick="setting()">쇼핑몰 기본설정</li>
+            <li title="쇼핑몰 공지사항">쇼핑몰 공지사항</li>
         </ol>
     </div>
 </nav>

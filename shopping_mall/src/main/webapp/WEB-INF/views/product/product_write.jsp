@@ -23,7 +23,7 @@
 <main class="maincss">
 <section>
 <p>상품 등록 페이지</p>
-<form id="frm">
+<form id="frm" enctype="multipart/form-data">
 <div class="product_insert">
     <ul>
         <li>대메뉴 카테고리</li>
@@ -76,7 +76,7 @@
     <ul>
         <li>상품재고</li>
         <li>
-            <input type="text" class="product_input3" name="psold_out" maxlength="4" value="0">EA <span class="help_text">※ 숫자만 입력하세요. 재고가 0일 경우 soldout이 됩니다.</span>
+            <input type="text" class="product_input3" name="pstock" maxlength="4" value="0">EA <span class="help_text">※ 숫자만 입력하세요. 재고가 0일 경우 soldout이 됩니다.</span>
         </li>
     </ul>
     <ul>
@@ -106,15 +106,15 @@
         <li>
             <ol style="width:100%; height: auto;">
             <li style="width:100%; height:45px;">
-            <input type="file" name="pfile">
+            <input type="file" id="pfile" name="pfile">
             <span class="help_text">※ 상품 대표이미지 이며, 이미지 용량은 2MB 까지 입니다.</span>
             </li>
             <li style="height:45px;">
-            <input type="file" name="padd_file1">
+            <input type="file" id="padd_file1" name="padd_file1">
             <span class="help_text">※ 추가 이미지 이며, 이미지 용량은 2MB 까지 입니다.</span>
             </li>
             <li style="height:45px;">
-            <input type="file" name="padd_file2">
+            <input type="file" id="padd_file2" name="padd_file2">
             <span class="help_text">※ 추가 이미지 이며, 이미지 용량은 2MB 까지 입니다.</span>
             </li>
             </ol>

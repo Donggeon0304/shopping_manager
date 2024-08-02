@@ -4,11 +4,13 @@
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias alias="admindto" type="dto.admin_dto"/>
-		<typeAlias alias="siteinfodto" type="dto.siteinfo_dto"/>
-		<typeAlias alias="paydto" type="dto.pay_dto"/>
-		<typeAlias alias="sitepaydto" type="dto.sitepay_dto"/>
-		<typeAlias alias="catedto" type="dto.cate_dto"/>
-		<typeAlias alias="productsdto" type="dto.products_dto"/>
+		<typeAlias alias="admindto" type="dto.AdminDto"/>
+		<typeAlias alias="siteinfodto" type="dto.SiteInfoDto"/>
+		<typeAlias alias="paydto" type="dto.PayDto"/>
+		<typeAlias alias="sitepaydto" type="dto.SitePayDto"/>
+		<typeAlias alias="catedto" type="dto.CateDto"/>
+		<typeAlias alias="productsdto" type="dto.ProductsDto"/>
+		<typeAlias alias="products" type="model.Products"/>
+		<typeAlias alias="productfile" type="model.ProductFile"/>
 	</typeAliases>
 </configuration>

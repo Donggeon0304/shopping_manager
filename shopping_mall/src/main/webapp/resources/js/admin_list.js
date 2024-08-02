@@ -12,6 +12,7 @@ $(document).ready(()=>{
 			})
 			.then(data => {
 				console.log('Success:', data);
+				alert('관리자 승인 되었습니다.');
 				repage();
 			})
 			.catch(error => {
@@ -32,6 +33,7 @@ $(document).ready(()=>{
 			})
 			.then(data => {
 				console.log('Success:', data);
+				alert('관리자 승인해제 되었습니다.');
 				repage();
 			})
 			.catch(error => {

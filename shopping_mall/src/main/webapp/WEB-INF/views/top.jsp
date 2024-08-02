@@ -3,7 +3,7 @@
 <%
 	HttpSession hs = request.getSession();
 	if(hs.getAttribute("admin")==null || hs.getAttribute("admin")==""){
-		out.print("<script>alert('비정상적인 접근입니다.'); location.href='./index';</script>");
+		out.print("<script>alert('비정상적인 접근입니다.'); location.href='../admin/index';</script>");
 	}
 %>
 <script src="../resources/js/jquery.js"></script>
@@ -29,6 +29,6 @@ $(()=>{
 	})
 })
 function reload(){
-	location.href="./index";
+	location.href="../admin/index";
 }
 </script>

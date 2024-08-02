@@ -52,20 +52,21 @@
         <li>관리</li>
     </ul>
    	<c:choose>
-	   	<c:when test="${not empty data}">
-		   	<c:forEach var="product" items="${data}"> 
+	   	<c:when test="${not empty products}">
+		   	<c:forEach var="product" items="${products}" varStatus="productStatus"> 
+		   		<c:set var="file" value="${files[productStatus.index]}"/>
 			    <ul>
 			        <li><input type="checkbox"></li>
-			        <li>상품코드</li>
-			        <li>이미지</li>
-			        <li>상품명</li>
-			        <li>카테고리 분류</li>
-			        <li>34,000</li>
-			        <li>30,000</li>
-			        <li>11%</li>
-			        <li>100</li>
-			        <li>Y</li>
-			        <li>N</li>
+			        <li>${product.pcode}</li>
+			        <li><img src="${file.mfile_url}" title="${file.mfile_name}" width="100"></li>
+			        <li>${product.pname}</li>
+			        <li>${product.cate}</li>
+			        <li>${product.price}</li>
+			        <li>${product.pdc_price}</li>
+			        <li>${product.pdc_per}%</li>
+			        <li>${product.pstock}</li>
+			        <li>${product.puse}</li>
+			        <li>${product.psold_out}</li>
 			        <li>관리</li>
 			    </ul>
 		    </c:forEach>

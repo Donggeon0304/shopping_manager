@@ -25,4 +25,8 @@ public class CateService {
 	public boolean del_cate(List<String> cidx) {
 		return mp.cate_delete(cidx) > 0;
 	}
+	
+	public int get_cidx(String cate) {
+		return mp.cate_selectCidx(cate);
+	}
 }

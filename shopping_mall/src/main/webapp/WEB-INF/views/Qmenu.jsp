@@ -6,10 +6,10 @@
         	<%if(hs.getAttribute("admin") !=null && hs.getAttribute("admin").equals("최고 관리자")){ %>
             <li title="쇼핑몰 관리자 리스트" onclick="list()">쇼핑몰 관리자 리스트</li>
             <%}%>
-            <li title="쇼핑몰 회원관리">쇼핑몰 회원관리</li>
+            <li title="쇼핑몰 회원관리" onclick="member()">쇼핑몰 회원관리</li>
             <li title="쇼핑몰 상품관리" onclick="product()">쇼핑몰 상품관리</li>
             <li title="쇼핑몰 기본설정" onclick="setting()">쇼핑몰 기본설정</li>
-            <li title="쇼핑몰 공지사항">쇼핑몰 공지사항</li>
+            <li title="쇼핑몰 공지사항" onclick="notice()">쇼핑몰 공지사항</li>
         </ol>
     </div>
 </nav>
@@ -17,10 +17,16 @@
 function list(){
 	location.href="../admin/admin_list.do";
 }
+function member(){
+	location.href="../member/shop_member_list.do";
+}
 function product(){
 	location.href="../product/product_list.do";
 }
 function setting(){
 	location.href="../admin/siteinfo.do";
+}
+function notice(){
+	location.href="../notice/notice_list";
 }
 </script>

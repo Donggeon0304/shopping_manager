@@ -6,7 +6,7 @@
 	<typeAliases>
 		<typeAlias alias="admindto" type="dto.AdminDto"/>
 		<typeAlias alias="siteinfodto" type="dto.SiteInfoDto"/>
-		<typeAlias alias="paydto" type="dto.PayDto"/>
+		<typeAlias alias="paydto" type="dto.PayInfoDto"/>
 		<typeAlias alias="sitepaydto" type="dto.SitePayDto"/>
 		<typeAlias alias="catedto" type="dto.CateDto"/>
 		<typeAlias alias="productsdto" type="dto.ProductsDto"/>

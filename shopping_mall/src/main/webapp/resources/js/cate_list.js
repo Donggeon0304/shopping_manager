@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded",function(){
 			}
 		})
 		if(cked){
-			if(confirm('정말 삭제하시겠습니까?')){
+			if(confirm('삭제시 해당 데이터는 복구되지 않습니다.\n정말 삭제하시겠습니까?')){
 				const delSelected = Array.from(document.querySelectorAll(".ck:checked"))
 			    .map(checkbox => checkbox.getAttribute("data-del"));
 			
@@ -54,12 +54,13 @@ document.addEventListener("DOMContentLoaded",function(){
 				})
 				.then(response => response.text())
 				.then(data => {
-					console.log(data);
 					if(data === "ok"){
 						alert("삭제 성공하였습니다.")
 						window.location.reload();
+					}else if(data === "has"){
+						alert("사용중인 카테고리 입니다.");
 					}else{
-						alert("삭제 성공하였습니다.")
+						alert("삭제 실패하였습니다.")
 					}
 				})
 				.catch(() =>{

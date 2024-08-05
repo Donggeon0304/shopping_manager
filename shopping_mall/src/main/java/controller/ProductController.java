@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import dto.CateDto;
 import dto.ProductsDto;
@@ -62,22 +64,36 @@ public class ProductController {
 	//카테고리 삭제
 	@PostMapping("cate_del.do")
 	public ResponseEntity<String> cate_del(@RequestBody List<String> cidx) {
+		for(String a : cidx ) {
+			if(ps.cateck_products(Integer.parseInt(a))) {
+				return ResponseEntity.ok("has");
+			}
+		}
 		boolean result = cs.del_cate(cidx);
 		if(result) {
 			return ResponseEntity.ok("ok");			
 		}else {
 			return ResponseEntity.ok("no");
-		}
+		}	
 	}
 	
 	@GetMapping("product_list.do")
-	public String product_list(Model m, HttpServletRequest req) {
-		System.out.println(req.getServletContext().getRealPath("/upload/"));
+	public String product_list(Model m, HttpServletRequest req, String search_part, String search_word) {
 		List<List<ProductsDto>> result = new ArrayList<List<ProductsDto>>();
-		result.add(ps.get_products());
-		result.add(fs.get_productFile());
-		m.addAttribute("products",ps.get_products());
-		m.addAttribute("files",fs.get_productFile());
+		List<Integer> data = new ArrayList<Integer>();
+		if(search_part!=null && search_word!=null) {
+			result.add(ps.search_products(search_part, search_word));
+			for(ProductsDto li : ps.search_products(search_part, search_word)) {
+				data.add(li.getPidx());
+			}
+			m.addAttribute("products",ps.search_products(search_part, search_word));
+			m.addAttribute("files",fs.search_productFile(data));
+		}else {
+			result.add(ps.get_products());
+			result.add(fs.get_productFile());
+			m.addAttribute("products",ps.get_products());
+			m.addAttribute("files",fs.get_productFile());			
+		}
 		return "/product/product_list";
 	}
 	
@@ -89,14 +105,38 @@ public class ProductController {
 	
 	//상품 등록
 	@PostMapping("product_add.do")
+	@ResponseBody
 	public String product_add(@ModelAttribute ProductsDto pt, HttpServletRequest req) throws IOException {
+		pt.setCidx(cs.get_cidx(pt.getCate()));
 		boolean addResult = ps.add_products(pt);
 		if(addResult) {
 			pt.setPidx(ps.get_pidx());
-			System.out.println(ps.get_pidx());
 			fs.add_file(pt, req);
+			return "ok";
+		}else {
+			return "no";
 		}
-		return "redirect:/product/product_list.do";
+	}
+	
+	//상품 삭제
+	@PostMapping("product_del.do")
+	public ResponseEntity<String> product_del(@RequestBody List<String> pidx){
+		if(fs.del_productFile(pidx) && ps.del_products(pidx)) {
+			return ResponseEntity.ok("ok");			
+		}else{
+			return ResponseEntity.ok("no");
+		}
+	}
+	
+	//상품코드 중복확인
+	@GetMapping("product_codeck")
+	@ResponseBody
+	public String product_codeck(@RequestParam String pcode) {
+		if(ps.codeck_products(pcode)) {
+			return "no";			
+		}else {
+			return "ok";
+		}
 	}
 	
 }

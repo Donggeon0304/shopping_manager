@@ -4,7 +4,7 @@ package service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dto.PayDto;
+import dto.PayInfoDto;
 import dto.SiteInfoDto;
 import dto.SitePayDto;
 import mapper.ShoppingMapper;
@@ -19,7 +19,7 @@ public class SiteService {
 		return mp.site_insert(dto) > 0 ? "success" : "fail";
 	}
 	
-	public String add_pay(PayDto dto) {
+	public String add_pay(PayInfoDto dto) {
 		return mp.pay_insert(dto) > 0 ? "success" : "fail";
 	}
 	
@@ -27,7 +27,7 @@ public class SiteService {
 		return mp.site_select();
 	}
 	
-	public PayDto get_pay() {
+	public PayInfoDto get_pay() {
 		return mp.pay_select();
 	}
 	
@@ -35,7 +35,7 @@ public class SiteService {
 		return mp.site_update(dto) > 0;
 	}
 	
-	public boolean update_pay(PayDto dto) {
+	public boolean update_pay(PayInfoDto dto) {
 		return mp.pay_update(dto) > 0;
 	}
 	
@@ -49,7 +49,7 @@ public class SiteService {
         SiteInfoDto siteinfo = mp.site_select();
         dto.setSiteinfo_dto(siteinfo);
 
-        PayDto pay = mp.pay_select();
+        PayInfoDto pay = mp.pay_select();
         dto.setPay_dto(pay);
 
         return dto;

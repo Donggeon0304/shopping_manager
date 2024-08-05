@@ -26,13 +26,13 @@
     <div class="cate_insert">
         <ul>
             <li>분류코드</li>
-            <li><input type="text" class="cate_input1" name="cf_code" readonly></li>
+            <li><input type="text" class="cate_input1" name="cf_code" maxlength="6"></li>
             <li>※ 분류코드는 대메뉴 코드와 소메뉴 코드를 합쳐서 자동 입력 됩니다.</li>
         </ul>
         <ul>
             <li>대메뉴 코드</li>
             <li>
-                <input type="text" class="cate_input2" name="lm_code" list="lg_menu">
+                <input type="text" class="cate_input2" name="lm_code" list="lg_menu" maxlength="6">
                 <datalist id="lg_menu">
                     <option>01</option>
                     <option>02</option>

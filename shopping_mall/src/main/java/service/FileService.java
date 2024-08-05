@@ -22,10 +22,18 @@ public class FileService {
 	
 	public boolean add_file(ProductsDto dto, HttpServletRequest req) throws IOException {
 		dto = new FileUtils().file_url(dto, req);
-		return mp.productFile_insert(dto) > 0;
+		return mp.product_file_insert(dto) > 0;
 	}
 	
 	public List<ProductsDto> get_productFile(){
 		return mp.product_file_select();
+	}
+	
+	public List<ProductsDto> search_productFile(List<Integer> list){
+		return mp.product_file_search(list);
+	}
+	
+	public boolean del_productFile(List<String> pidx) {
+		return mp.product_file_delete(pidx) > 0;
 	}
 }

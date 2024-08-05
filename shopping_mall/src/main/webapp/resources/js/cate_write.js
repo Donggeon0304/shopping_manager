@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded",function(){
 	})
 })
 
-$(function(){
+/*$(function(){
 	$(".cate_input2").on("keyup",function(){
 		$(".cate_input1").val($(this).val());
 	})
-})
+})*/

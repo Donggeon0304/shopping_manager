@@ -76,12 +76,24 @@ where cidx in
 </foreach>
 </delete>
 
+<select id="cate_selectCidx" resultType="int">
+select cidx from category where lm_name=#{cate}
+</select>
+
 <!-- products -->
 <insert id="products_insert">
-insert into products values ('0',#{cate},#{pcode},#{pname},#{padd_text},#{price},#{pdc_per},#{pdc_price},#{pstock},#{puse},#{psold_out},#{ptext},now())
+insert into products values ('0',#{cidx},#{cate},#{pcode},#{pname},#{padd_text},#{price},#{pdc_per},#{pdc_price},#{pstock},#{puse},#{psold_out},#{ptext},now())
 </insert>
 
-<insert id="productFile_insert">
+<select id="products_codeck" resultType="int">
+select count(*) from products where pcode=#{pcode}
+</select>
+
+<select id="products_cateck" resultType="int">
+select count(*) from products where cidx=#{cidx}
+</select>
+
+<insert id="product_file_insert">
 insert into product_file values ('0',#{pidx},#{mfile_name},#{mfile_url},#{file1_name},#{file1_url},#{file2_name},#{file2_url})
 </insert>
 
@@ -93,8 +105,49 @@ select pidx from products order by pidx desc limit 1
 select * from products order by pidx desc
 </select>
 
+<select id="products_search" resultType="productsdto" parameterType="map">
+select * from products
+<where>
+	<if test="search_part==1">
+		pname like concat('%',#{search_word},'%')
+	</if>
+	<if test="search_part==2">
+		pcode like concat('%',#{search_word},'%')
+	</if>
+	<if test="search_part==3">
+		cate like concat('%',#{search_word},'%')
+	</if>
+</where>
+order by pidx desc
+</select>
+
 <select id="product_file_select" resultType="productsdto">
 select * from product_file order by pidx desc
 </select>
+
+<select id="product_file_search" resultType="productsdto" parameterType="list">
+select * from product_file
+where pidx in
+<foreach item="pidx" collection="list" open="(" separator="," close=")">
+	#{pidx}
+</foreach>
+order by pidx desc
+</select>
+
+<delete id="products_delete" parameterType="list">
+delete from products
+where pidx in
+<foreach item="pidx" collection="list" open="(" separator="," close=")">
+	#{pidx}
+</foreach>
+</delete>
+
+<delete id="product_file_delete" parameterType="list">
+delete from product_file
+where pidx in
+<foreach item="pidx" collection="list" open="(" separator="," close=")">
+	#{pidx}
+</foreach>
+</delete>
 
 </mapper>

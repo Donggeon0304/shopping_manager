@@ -39,8 +39,8 @@
     <ul>
         <li>상품코드</li>
         <li>
-            <input type="text" class="product_input1" id="rancode" name="pcode"> 
-            <input type="button" value="중복확인" title="중복확인" class="product_btn"> <span class="help_text">※ 상품코드는 절대 중복되지 않도록 합니다.</span>
+            <input type="text" class="product_input1" id="rancode" name="pcode" maxlength="7"> 
+            <input type="button" value="중복확인" title="중복확인" class="product_btn" id="redundancy_ck"> <span class="help_text">※ 상품코드는 절대 중복되지 않도록 합니다.</span>
         </li>
     </ul>
     <ul>

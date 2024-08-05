@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ProductsDto {
-	private int pidx;
+	private int pidx, cidx;
 	private String cate, pcode, pname, padd_text, price, pdc_per, pdc_price, 
 	pstock, puse, psold_out, ptext, pdate;;
 	private MultipartFile pfile, padd_file1, padd_file2;

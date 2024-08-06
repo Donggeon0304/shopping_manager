@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../resources/css/basic.css">
     <link rel="stylesheet" type="text/css" href="../resources/css/login.css?v=1">
     <link rel="stylesheet" type="text/css" href="../resources/css/main.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/category.css?v=6">
+    <link rel="stylesheet" type="text/css" href="../resources/css/category.css?v=8">
     <link rel="icon" href="../resources/img/logo.png" sizes="128x128">
     <link rel="icon" href="../resources/img/logo.png" sizes="64x64">
     <link rel="icon" href="../resources/img/logo.png" sizes="32x32">
@@ -71,12 +71,18 @@
 	</c:choose>
 </div>
 </form>
+<c:set var="paging" value="${count/size}"/>
+<c:if test="${count%size != 0 }">
+<c:set var="paging" value="${paging+1}" />
+</c:if>
 <div class="subpage_view3">
     <ul class="pageing">
         <li><img src="../resources/ico/double_left.svg"></li>
         <li><img src="../resources/ico/left.svg"></li>
-        <li>1</li>
-        <li><img src="../resources/ico/right.svg"></li>
+        <c:forEach var="page" begin="1" end="${paging}" step="1">
+        <li onclick="paging(${page})">${page}</li>
+        </c:forEach>
+        <li onclick="page_next()"><img src="../resources/ico/right.svg"></li>
         <li><img src="../resources/ico/double_right.svg"></li>
     </ul>
 </div>

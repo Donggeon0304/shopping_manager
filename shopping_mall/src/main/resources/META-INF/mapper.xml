@@ -68,6 +68,10 @@ insert into category values ('0',#{cf_code},#{lm_code},#{lm_name},#{cuse},now())
 select * from category order by cidx desc
 </select>
 
+<select id="cate_select_page" resultType="catedto">
+select * from category order by cidx desc limit #{page},#{size}
+</select>
+
 <delete id="cate_delete" parameterType="list">
 delete from category
 where cidx in
@@ -78,6 +82,10 @@ where cidx in
 
 <select id="cate_selectCidx" resultType="int">
 select cidx from category where lm_name=#{cate}
+</select>
+
+<select id="cate_ck" resultType="int">
+select count(*) from category
 </select>
 
 <!-- products -->

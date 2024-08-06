@@ -22,6 +22,14 @@ public class CateService {
 		return mp.cate_select();
 	}
 	
+	public List<CateDto> get_cate_page(int page, int size){
+		return mp.cate_select_page(page, size);
+	}
+	
+	public int ck_cate() {
+		return mp.cate_ck();
+	}
+	
 	public boolean del_cate(List<String> cidx) {
 		return mp.cate_delete(cidx) > 0;
 	}

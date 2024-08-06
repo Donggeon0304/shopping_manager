@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -42,10 +44,18 @@ public class ProductController {
 	
 	//카테고리 리스트 사이트
 	@GetMapping("cate_list.do")
-	public String cate_list(Model m) {
-		m.addAttribute("data",cs.get_cate());
+	public String cate_list(Model m, Integer page) {
+		if(page == null) {
+			page = 1;
+		}
+		int size = 5;
+		page = (page-1) * size;
+		m.addAttribute("size",size);
+		m.addAttribute("data",cs.get_cate_page(page,size));
+		m.addAttribute("count", cs.ck_cate());
 		return "/product/cate_list";
 	}
+	
 	//카테고리 작성 사이트
 	@GetMapping("cate_write.do")
 	public String cate_write() {

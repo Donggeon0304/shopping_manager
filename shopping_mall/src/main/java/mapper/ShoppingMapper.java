@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import dto.AdminDto;
 import dto.CateDto;
@@ -33,8 +34,10 @@ public interface ShoppingMapper {
     
     int cate_insert(CateDto dto);
     List<CateDto> cate_select();
+    List<CateDto> cate_select_page(@Param("page") int page, @Param("size") int size);
     int cate_delete(List<String> list);
     int cate_selectCidx(String cate);
+    int cate_ck();
     
     int products_insert(ProductsDto dto);
     int products_pidx();

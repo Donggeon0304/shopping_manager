@@ -72,6 +72,31 @@ select * from category order by cidx desc
 select * from category order by cidx desc limit #{page},#{size}
 </select>
 
+<select id="cate_search" resultType="catedto" parameterType="map">
+select * from category
+<where>
+	<if test="search_part==1">
+		lm_name like concat('%',#{search_word},'%')
+	</if>
+	<if test="search_part==2">
+		lm_code like concat('%',#{search_word},'%')
+	</if>
+</where>
+order by cidx desc limit #{page},#{size}
+</select>
+
+<select id="cate_ck_search" resultType="int" parameterType="map">
+select count(*) from category
+<where>
+	<if test="search_part==1">
+		lm_name like concat('%',#{search_word},'%')
+	</if>
+	<if test="search_part==2">
+		lm_code like concat('%',#{search_word},'%')
+	</if>
+</where>
+</select>
+
 <delete id="cate_delete" parameterType="list">
 delete from category
 where cidx in
@@ -113,6 +138,18 @@ select pidx from products order by pidx desc limit 1
 select * from products order by pidx desc
 </select>
 
+<select id="products_select_page" resultType="productsdto">
+select * from products order by pidx desc limit #{page},#{size}
+</select>
+
+<select id="product_file_select_page" resultType="productsdto">
+select mfile_name, mfile_url from product_file order by pidx desc limit #{page},#{size}
+</select>
+
+<select id="products_ck" resultType="int">
+select count(*) from products
+</select>
+
 <select id="products_search" resultType="productsdto" parameterType="map">
 select * from products
 <where>
@@ -126,20 +163,35 @@ select * from products
 		cate like concat('%',#{search_word},'%')
 	</if>
 </where>
-order by pidx desc
+order by pidx desc limit #{page},#{size}
+</select>
+
+<select id="products_ck_search" resultType="int" parameterType="map">
+select count(*) from products
+<where>
+	<if test="search_part==1">
+		pname like concat('%',#{search_word},'%')
+	</if>
+	<if test="search_part==2">
+		pcode like concat('%',#{search_word},'%')
+	</if>
+	<if test="search_part==3">
+		cate like concat('%',#{search_word},'%')
+	</if>
+</where>
 </select>
 
 <select id="product_file_select" resultType="productsdto">
 select * from product_file order by pidx desc
 </select>
 
-<select id="product_file_search" resultType="productsdto" parameterType="list">
+<select id="product_file_search" resultType="productsdto" parameterType="map">
 select * from product_file
 where pidx in
 <foreach item="pidx" collection="list" open="(" separator="," close=")">
 	#{pidx}
 </foreach>
-order by pidx desc
+order by pidx desc limit #{page},#{size}
 </select>
 
 <delete id="products_delete" parameterType="list">

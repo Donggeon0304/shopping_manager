@@ -24,68 +24,26 @@
 <section>
 <p>상품관리 페이지</p>
 <div class="subpage_view">
-    <span>등록된 상품 0건</span>
+    <span id="product_ea"></span>
     <form id="search">
     <span>
-        <select class="p_select1" name="search_part">
-            <option value="1">상품명</option>
-            <option value="2">상품코드</option>
-            <option value="3">카테고리</option>
+        <select class="p_select1" id="search_part" name="search_part">
+            <option value="1" id="product_name">상품명</option>
+            <option value="2" id="product_code">상품코드</option>
+            <option value="3" id="product_cate">카테고리</option>
         </select>
-        <input type="text" class="p_input1" name="search_word" placeholder="검색어를 입력해 주세요">
+        <input type="text" class="p_input1"  id="search_word" name="search_word" placeholder="검색어를 입력해 주세요">
         <input type="submit" value="검색" title="상품검색" class="p_submit">
     </span>
     </form>
 </div>
-<div class="subpage_view2">
-    <ul>
-        <li><input type="checkbox" name="allck" class="allck"></li>
-        <li>코드</li>
-        <li>이미지</li>
-        <li>상품명</li>
-        <li>카테고리 분류</li>
-        <li>판매가격</li>
-        <li>할인가격</li>
-        <li>할인율</li>
-        <li>재고현황</li>
-        <li>판매유/무</li>
-        <li>품절</li>
-        <li>관리</li>
-    </ul>
-   	<c:choose>
-	   	<c:when test="${not empty products}">
-		   	<c:forEach var="product" items="${products}" varStatus="productStatus"> 
-		   		<c:set var="file" value="${files[productStatus.index]}"/>
-			    <ul>
-			        <li><input type="checkbox" class="ck" name="ck" data-del="${product.pidx}"></li>
-			        <li>${product.pcode}</li>
-			        <li><img src="${file.mfile_url}" title="${file.mfile_name}" alt="${file.mfile_name}" width="50" height="50"></li>
-			        <li>${product.pname}</li>
-			        <li>${product.cate}</li>
-			        <li>${product.price}</li>
-			        <li>${product.pdc_price}</li>
-			        <li>${product.pdc_per}%</li>
-			        <li>${product.pstock}</li>
-			        <li>${product.puse}</li>
-			        <li>${product.psold_out}</li>
-			        <li><input type="button" value="수정" id="mod"></li>
-			    </ul>
-		    </c:forEach>
-	    </c:when>
-	    <c:otherwise>
-		    <ul>
-		        <li style="width: 100%;">등록된 상품이 없습니다.</li>
-		    </ul>
-	    </c:otherwise>
-    </c:choose>
-</div>
+<div class="subpage_view2" id="product_list"></div>
 <div class="subpage_view3">
-    <ul class="pageing">
-        <li><img src="../resources/ico/double_left.svg"></li>
-        <li><img src="../resources/ico/left.svg"></li>
-        <li>1</li>
-        <li><img src="../resources/ico/right.svg"></li>
-        <li><img src="../resources/ico/double_right.svg"></li>
+    <ul class="pageing" id="paging">
+        <li onclick="page_first()"><img src="../resources/ico/double_left.svg"></li>
+        <li onclick="page_previous()"><img src="../resources/ico/left.svg"></li>
+        <li onclick="page_next()"><img src="../resources/ico/right.svg"></li>
+        <li onclick="page_last()"><img src="../resources/ico/double_right.svg"></li>
     </ul>
 </div>
 <div class="subpage_view4">

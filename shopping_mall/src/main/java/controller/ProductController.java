@@ -44,16 +44,25 @@ public class ProductController {
 	
 	//카테고리 리스트 사이트
 	@GetMapping("cate_list.do")
-	public String cate_list(Model m, Integer page) {
-		if(page == null) {
-			page = 1;
-		}
-		int size = 5;
-		page = (page-1) * size;
-		m.addAttribute("size",size);
-		m.addAttribute("data",cs.get_cate_page(page,size));
-		m.addAttribute("count", cs.ck_cate());
+	public String cate_list() {
 		return "/product/cate_list";
+	}
+	
+	//카테고리 리스트 출력 + 검색 (ajax)
+	@GetMapping("cate_list_ajax")
+	public void cate_list_ajax(HttpServletResponse res, int page, int size, String part, String word) throws Exception {
+		res.setContentType("aplication/json;charset=utf-8");
+		page = size * (page-1);
+		
+		JSONArray ja = new JSONArray();
+		if(part!=null && word!=null && !(word.equals(""))) {
+			ja.put(cs.search_cate(page, size, part, word));
+			ja.put(cs.search_ck_cate(part, word));
+		}else {
+			ja.put(cs.get_cate_page(page,size));
+			ja.put(cs.ck_cate());
+		}
+		res.getWriter().print(ja.toString());
 	}
 	
 	//카테고리 작성 사이트
@@ -87,24 +96,33 @@ public class ProductController {
 		}	
 	}
 	
+	//상품 리스트 페이지
 	@GetMapping("product_list.do")
-	public String product_list(Model m, HttpServletRequest req, String search_part, String search_word) {
-		List<List<ProductsDto>> result = new ArrayList<List<ProductsDto>>();
+	public String product_list() {
+		return "/product/product_list";
+	}
+	
+	//상품 리스트 출력 + 검색 (ajax)
+	@GetMapping("product_list_ajax")
+	public void product_list_ajax(HttpServletResponse res, int page, int size, String part, String word) throws Exception {
+		res.setContentType("aplication/json;charset=utf-8");
+		page = size * (page-1);
+		
 		List<Integer> data = new ArrayList<Integer>();
-		if(search_part!=null && search_word!=null) {
-			result.add(ps.search_products(search_part, search_word));
-			for(ProductsDto li : ps.search_products(search_part, search_word)) {
+		JSONArray ja = new JSONArray();
+		if(part!=null && word!=null && !(word.equals(""))) {
+			for(ProductsDto li : ps.search_products(page, size, part, word)) {
 				data.add(li.getPidx());
 			}
-			m.addAttribute("products",ps.search_products(search_part, search_word));
-			m.addAttribute("files",fs.search_productFile(data));
+			ja.put(ps.search_products(page, size, part, word));
+			ja.put(ps.search_ck_products(part, word));
+			ja.put(fs.search_productFile(page, size, data));
 		}else {
-			result.add(ps.get_products());
-			result.add(fs.get_productFile());
-			m.addAttribute("products",ps.get_products());
-			m.addAttribute("files",fs.get_productFile());			
+			ja.put(ps.get_products_page(page,size));
+			ja.put(ps.ck_products());
+			ja.put(fs.get_productFile_page(page, size));
 		}
-		return "/product/product_list";
+		res.getWriter().print(ja.toString());
 	}
 	
 	@GetMapping("product_write.do")

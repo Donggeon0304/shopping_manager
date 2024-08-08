@@ -3,6 +3,7 @@ var pl = document.getElementById("product_list");
 var pagehtml = document.getElementById("paging");
 var a = "";
 var ea = "";
+var c = "";
 var pageNumber = 1;
 var part = (Number)(getQueryParam("part")) || 1;
 var word = getQueryParam("word") || "";
@@ -45,7 +46,7 @@ document.addEventListener("DOMContentLoaded",function(){
 		.then(response => response.json())
 		.then(data => {
 			a = data[0]; //products 데이터 리스트
-			c = data[2]; //product_file데이터 리스트
+			c = data[2]; //product_file 데이터 리스트
 			ea = data[1]; //총 데이터 갯수
 			pageNumber = Number(Math.ceil(ea/size)); //페이지 갯수
 			
@@ -56,7 +57,7 @@ document.addEventListener("DOMContentLoaded",function(){
 			    pagehtml.removeChild(pagehtml.children[2]);
 			}
 			
-			//카테고리
+			//상품
 			pl.innerHTML = "";
 			var ul2 = document.createElement("ul");
 			ul2.innerHTML = `
@@ -83,7 +84,7 @@ document.addEventListener("DOMContentLoaded",function(){
 				var second = pagehtml.children[2];
 				pagehtml.insertBefore(li,second);
 				
-				//카테고리 리스트
+				//상품 리스트
 				var ul = document.createElement("ul");
 				ul.innerHTML += `
 				<li style="width: 100%;">등록된 카테고리가 없습니다.</li>
@@ -103,7 +104,7 @@ document.addEventListener("DOMContentLoaded",function(){
 					var second = pagehtml.children[f+1];
 					pagehtml.insertBefore(li,second);
 				}
-				//카테고리 리스트
+				//상품 리스트
 				for(var f=0; f<a.length; f++){
 					var ul = document.createElement("ul");
 					ul.innerHTML += `

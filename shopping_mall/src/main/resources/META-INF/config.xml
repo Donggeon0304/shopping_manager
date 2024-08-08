@@ -12,5 +12,6 @@
 		<typeAlias alias="productsdto" type="dto.ProductsDto"/>
 		<typeAlias alias="products" type="model.Products"/>
 		<typeAlias alias="productfile" type="model.ProductFile"/>
+		<typeAlias alias="noticedto" type="dto.NoticeDto"/>
 	</typeAliases>
 </configuration>

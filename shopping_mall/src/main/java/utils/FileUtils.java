@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import dto.NoticeDto;
 import dto.ProductsDto;
 
 public class FileUtils {
@@ -51,6 +52,24 @@ public class FileUtils {
 			file2.transferTo(save3);
 			dto.setFile2_name(name3);
 			dto.setFile2_url("http://localhost:8080/upload/"+file2_renm);
+		}
+		return dto;
+	}
+	
+	public NoticeDto file_url(NoticeDto dto,HttpServletRequest req) throws IOException {
+		MultipartFile nfile = dto.getNfile();
+		
+		String url = req.getServletContext().getRealPath("/upload/");
+		
+		if(nfile.getSize() > 0) {
+			String name = nfile.getOriginalFilename();
+			int indSub = name.lastIndexOf(".");
+			String nfile_renm = this.re() + name.substring(indSub);
+			String nfile_url = url + nfile_renm;
+			File save = new File(nfile_url);
+			nfile.transferTo(save);
+			dto.setNfile_name(name);
+			dto.setNfile_url("http://localhost:8080/upload/"+nfile_renm);
 		}
 		return dto;
 	}

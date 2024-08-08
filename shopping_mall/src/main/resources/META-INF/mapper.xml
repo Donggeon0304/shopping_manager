@@ -210,4 +210,52 @@ where pidx in
 </foreach>
 </delete>
 
+<!-- notice -->
+<insert id="notice_insert">
+insert into notice value ('0',#{notice_use},#{notice_title},#{notice_writer},#{notice_text},#{notice_count},now())
+</insert>
+
+<insert id="notice_file_insert">
+insert into notice_file value('0',#{nidx},#{nfile_name},#{nfile_url})
+</insert>
+
+<select id="notice_select_idx" resultType="int">
+select nidx from notice order by nidx desc limit 1
+</select>
+
+<select id="notice_ck" resultType="int">
+select count(*) from notice
+</select>
+
+<select id="notice_select" resultType="noticedto">
+select * from notice order by nidx desc limit #{page},#{size}
+</select>
+
+<select id="notice_file_select" resultType="noticedto">
+select nfile_name, nfile_url from notice_file order by nidx desc limit #{page},#{size}
+</select>
+
+<select id="notice_select_one" resultType="noticedto">
+select * from notice where nidx=#{nidx}
+</select>
+
+<update id="notice_count" parameterType="int">
+update notice set notice_count=notice_count+1 where nidx=#{nidx}
+</update>
+
+<delete id="notice_delete" parameterType="list">
+delete from notice
+where nidx in
+<foreach item="nidx" collection="list" open="(" separator="," close=")">
+	#{nidx}
+</foreach>
+</delete>
+
+<delete id="notice_file_delete" parameterType="list">
+delete from notice_file
+where nidx in
+<foreach item="nidx" collection="list" open="(" separator="," close=")">
+	#{nidx}
+</foreach>
+</delete>
 </mapper>

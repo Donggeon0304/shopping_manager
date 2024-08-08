@@ -1,0 +1,9 @@
+create table notice(
+nidx int not null auto_increment primary key,
+notice_use varchar(1) not null,
+notice_title varchar(200) not null,
+notice_writer varchar(20) not null,
+notice_text text not null,
+notice_count varchar(10) not null,
+notice_date timestamp not null default current_timestamp
+);

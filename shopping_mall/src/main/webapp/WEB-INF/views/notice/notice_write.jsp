@@ -23,7 +23,7 @@
 <main class="maincss">
 <section>
     <p>공지사항 등록페이지</p>
-<form id="frm" enctype="multipart/form-data">
+<form id="frm">
 <div class="write_view">
 <ul>
     <li>공지사항 여부</li>
@@ -66,5 +66,5 @@
 <%@include file="../copyright.jsp" %>
 </body>
 <script>CKEDITOR.replace('notice_text')</script>
-<script src="../resources/js/notice_write.js?v=<%= System.currentTimeMillis() %>"></script>
+<script src="../resources/js/notice/notice_write.js?v=<%= System.currentTimeMillis() %>"></script>
 </html>

@@ -66,5 +66,5 @@
 </main>
 <%@include file="../copyright.jsp" %>
 </body>
-<script src="../resources/js/admin_list.js?v=<%= System.currentTimeMillis() %>"></script>
+<script src="../resources/js/admin/admin_list.js?v=<%= System.currentTimeMillis() %>"></script>
 </html>

@@ -18,7 +18,7 @@ function list(){
 	location.href="../admin/admin_list.do";
 }
 function member(){
-	location.href="../member/shop_member_list.do";
+	location.href="../admin/shop_member_list.do";
 }
 function product(){
 	location.href="../product/product_list.do";

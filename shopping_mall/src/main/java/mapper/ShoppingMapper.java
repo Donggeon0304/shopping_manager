@@ -70,6 +70,7 @@ public interface ShoppingMapper {
     List<NoticeDto> notice_select(@Param("page") int page, @Param("size") int size);
     List<NoticeDto> notice_file_select(@Param("page") int page, @Param("size") int size);
     NoticeDto notice_select_one(int nidx);
+    NoticeDto notice_file_select_one(int nidx);
     int notice_count(int nidx);
     int notice_delete(List<String> list);
     int notice_file_delete(List<String> list);

@@ -44,6 +44,7 @@ public class NoticeController {
 		ja.put(ns.getNotice(page,size));
 		ja.put(ns.getNoticeCk());
 		ja.put(ns.getNoticeFile(page, size));
+		ja.put(ns.getNotice(0,100));
 		res.getWriter().print(ja.toString());
 	}	
 	
@@ -74,17 +75,18 @@ public class NoticeController {
 	}
 	
 	//공지사항 세부사항
-	@GetMapping("/notice_detail")
-	public String notice_detail(Model m, int nidx) {
+	@GetMapping("/notice_view")
+	public String notice_view(Model m, int nidx) {
 		ns.countNoticeView(nidx);
 		m.addAttribute("notice",ns.getNoticeOne(nidx));
-		return "notice/notice_detail";
+		m.addAttribute("notice_file",ns.getNoticeFileOne(nidx));
+		return "notice/notice_view";
 	}
 	
 	//공지사항 삭제
 	@PostMapping("notice_remove")
-	public ResponseEntity<String> notice_remove(@RequestBody List<String> nidx){
-		if(ns.deleteNoticeFile(nidx) && ns.deleteNotice(nidx)) {
+	public ResponseEntity<String> notice_remove(@RequestBody List<String> nidx,HttpServletRequest req){
+		if(ns.deleteNoticeFile(nidx,req) && ns.deleteNotice(nidx)) {
 			return ResponseEntity.ok("ok");			
 		}else{
 			return ResponseEntity.ok("no");

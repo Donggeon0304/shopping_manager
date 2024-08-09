@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import dto.AdminDto;
 import dto.NoticeDto;
 import mapper.ShoppingMapper;
 import utils.FileUtils;
@@ -16,7 +17,9 @@ import utils.FileUtils;
 public class NoticeService {
 	
 	@Autowired
-	ShoppingMapper mp;
+	private ShoppingMapper mp;
+	
+	private FileUtils fu = new FileUtils(); 
 	
 	public boolean addNotice(NoticeDto dto) {
 		dto.setNotice_count(0);
@@ -27,7 +30,7 @@ public class NoticeService {
 	}
 	public boolean addNoticeFile(NoticeDto dto,HttpServletRequest req) throws IOException  {
 		if(dto.getNfile().getSize() > 0) {
-			dto = new FileUtils().file_url(dto, req);
+			dto = fu.file_url(dto, req);
 			return mp.notice_file_insert(dto) > 0;
 		}else {
 			return true;
@@ -37,7 +40,11 @@ public class NoticeService {
 		return mp.notice_select_idx();
 	}
 	public List<NoticeDto> getNotice(int page, int size){
-		return mp.notice_select(page, size);
+		List<NoticeDto> result = mp.notice_select(page, size);
+		for(NoticeDto ndt : result) {
+			ndt.setNotice_date(ndt.getNotice_date().substring(0,10));
+		}
+		return result;
 	}
 	public List<NoticeDto> getNoticeFile(int page, int size){
 		return mp.notice_file_select(page, size);
@@ -48,15 +55,18 @@ public class NoticeService {
 	public NoticeDto getNoticeOne(int nidx) {
 		return mp.notice_select_one(nidx);
 	}
+	public NoticeDto getNoticeFileOne(int nidx) {
+		return mp.notice_file_select_one(nidx);
+	}
 	public boolean countNoticeView(int nidx) {
 		return mp.notice_count(nidx) > 0;
 	}
 	public boolean deleteNotice(List<String> nidx) {
 		return mp.notice_delete(nidx) > 0;
 	}
-	public boolean deleteNoticeFile(List<String> nidx) {
-		System.out.println(nidx);
-		System.out.println("파일삭제");
+	public boolean deleteNoticeFile(List<String> nidx, HttpServletRequest req) {
+		List<NoticeDto> file = mp.notice_file_select(0, 100);
+		fu.deleteNoticeFile(file,req);
 		return mp.notice_file_delete(nidx) > 0;
 	}
 }

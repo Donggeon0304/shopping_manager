@@ -1,7 +1,6 @@
 package controller;
 
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -26,6 +25,12 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService as;
+	
+	//쇼핑몰 회원관리 페이지
+	@GetMapping("/shop_member_list.do")
+	public String shop_memeber_list() {
+		return "/admin/shop_member_list";
+	}
 	
 	//관리자 로그인
 	@PostMapping("/admin_main.do")

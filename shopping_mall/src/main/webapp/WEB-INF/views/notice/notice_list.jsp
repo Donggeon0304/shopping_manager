@@ -39,5 +39,5 @@
 </main>
 <%@include file="../copyright.jsp" %>
 </body>
-<script src="../resources/js/notice_list.js?v=<%= System.currentTimeMillis() %>"></script>
+<script src="../resources/js/notice/notice_list.js?v=<%= System.currentTimeMillis() %>"></script>
 </html>

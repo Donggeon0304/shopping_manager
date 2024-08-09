@@ -1,6 +1,7 @@
 package service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -23,9 +24,9 @@ public class FileService {
 	
 	@Autowired
 	private ShoppingMapper mp;
-	
+	private FileUtils fu = new FileUtils();
 	public boolean add_file(ProductsDto dto, HttpServletRequest req) throws IOException {
-		dto = new FileUtils().file_url(dto, req);
+		dto = fu.file_url(dto, req);
 		return mp.product_file_insert(dto) > 0;
 	}
 	
@@ -49,6 +50,8 @@ public class FileService {
 	}
 	
 	public boolean del_productFile(List<String> pidx) {
+		List<ProductsDto> file = mp.product_file_select();
+		//fu.deleteProductFiles(file);
 		return mp.product_file_delete(pidx) > 0;
 	}
 }

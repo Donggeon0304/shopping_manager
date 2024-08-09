@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded",function(){
 	}
 	window.detail = function(nidx){
 		localStorage.setItem("page",getQueryParam("page"));
-		location.href="./notice_detail?nidx="+nidx;
+		location.href="./notice_view?nidx="+nidx;
 	}
 	
 	//db 데이터 받기
@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded",function(){
 		.then(data => {
 			a = data[0]; //notice 데이터 리스트
 			c = data[2]; //notice_file 데이터 리스트 
+			d = data[3]; //notice_use == "Y" 데이터 리스트 
 			ea = data[1]; //총 데이터 갯수
 			pageNumber = Number(Math.ceil(ea/size)); //페이지 갯수
 			
@@ -93,16 +94,31 @@ document.addEventListener("DOMContentLoaded",function(){
 					var second = pagehtml.children[f+1];
 					pagehtml.insertBefore(li,second);
 				}
+				//공지사항 최상단
+				for(var f=0; f<ea; f++){
+					if(d[f].notice_use == "Y"){
+						var ol = document.createElement("ol");
+						ol.innerHTML += `
+						<li><input type="checkbox" class="ck" data-del="${d[f].nidx}"></li>
+				        <li><a style="color: black; font-size: 10px; font-weight: bold; background-color: white; padding: 3px; border-radius: 5px; border: 2px solid black; text-decoration: none;">필독공지</a></li>
+				        <li onclick="detail(${d[f].nidx})">${d[f].notice_title}</li>
+					    <li>${d[f].notice_writer}</li>
+				        <li>${d[f].notice_date}</li>
+				        <li>${d[f].notice_count}</li>
+						`;
+						nl.appendChild(ol);
+					}
+				}
 				//공지사항 리스트
 				for(var f=0; f<a.length; f++){
 					var ol = document.createElement("ol");
 					ol.innerHTML += `
 					<li><input type="checkbox" class="ck" data-del="${a[f].nidx}"></li>
-			        <li>${pageea}</li>
-			        <li onclick="detail(${a[f].nidx})">${a[f].notice_title}</li>
-				    <li>${a[f].notice_writer}</li>
-			        <li>${a[f].notice_date}</li>
-			        <li>${a[f].notice_count}</li>
+				       <li>${pageea}</li>
+				       <li onclick="detail(${a[f].nidx})">${a[f].notice_title}</li>
+					   <li>${a[f].notice_writer}</li>
+				       <li>${a[f].notice_date}</li>
+				       <li>${a[f].notice_count}</li>
 					`;
 					pageea--;
 					nl.appendChild(ol);

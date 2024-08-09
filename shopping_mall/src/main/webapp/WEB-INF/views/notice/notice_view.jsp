@@ -6,8 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지사항 상세보기 페이지</title>
-    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <title>공지사항 내용 확인 페이지</title>
     <link rel="stylesheet" type="text/css" href="../resources/css/basic.css">
     <link rel="stylesheet" type="text/css" href="../resources/css/login.css?v=10">
     <link rel="stylesheet" type="text/css" href="../resources/css/main.css?v=10">
@@ -22,48 +21,43 @@
 <%@ include file="../Qmenu.jsp" %>
 <main class="maincss">
 <section>
-    <p>공지사항 상세보기 페이지</p>
-<form id="frm" enctype="multipart/form-data">
+    <p>공지사항 확인 페이지</p>
 <div class="write_view">
-<ul>
-    <li>공지사항 여부</li>
-    <li>
-        <label class="label_notice"><em class="cbox"><input type="checkbox" name="notice_use" ${notice.notice_use == "Y" ? checked : ""}></em> 공지 출력</label> ※ 공지출력을 체크할 시 해당 글 내용은 최상단에 노출 되어 집니다.
-    </li>
-</ul>
 <ul>
     <li>공지사항 제목</li>
     <li>
-        <input type="text" class="notice_input1" name="notice_title" value="${notice.notice_title}" readonly> ※ 최대 150자까지 입력이 가능
+       <input type="text" class="notice_input1" name="notice_title" value="${notice.notice_title}" readonly>
     </li>
 </ul>
 <ul>
     <li>글쓴이</li>
     <li>
-        <input type="text" class="notice_input2" name="notice_writer" value="${notice.notice_writer}" readonly> ※ 관리자 이름이 노출 됩니다.       
+    	<input type="text" class="notice_input2" name="notice_writer" value="${notice.notice_writer}" readonly>
     </li>
 </ul>
 <ul>
     <li>첨부파일</li>
     <li>
-        <input type="text" name="nfile" value="첨부파일" readonly>       
+       <a href="${notice_file.nfile_url}" target="_blank" style="text-decoration: none; color: blue; font-weight: bold;" onclick="return openPopup(this.href);">
+		  ${notice_file.nfile_name}
+		</a>
     </li>
 </ul>
 <ul class="ul_height">
     <li>공지내용</li>
     <li>
-        <textarea class="notice_input3" name="notice_text" placeholder="공지내용을 입력하세요!" readonly>${notice.notice_text}</textarea>
+        <div class="notice_input3" style="overflow-y: auto;" name="notice_text">${notice.notice_text}</div>
     </li>
 </ul>
 </div>
-</form>
 <div class="board_btn">
     <button class="border_del">공지목록</button>
-    <button class="border_add">공지등록</button>
+    <button class="border_add">공지수정</button>
+    <button class="border_modify" style="margin-left: 8px;">공지삭제</button>
 </div>
 </section>
 </main>
 <%@include file="../copyright.jsp" %>
 </body>
-<script src="../resources/js/notice_detail.js?v=<%= System.currentTimeMillis() %>"></script>
+<script src="../resources/js/notice/notice_view.js?v=<%= System.currentTimeMillis() %>"></script>
 </html>

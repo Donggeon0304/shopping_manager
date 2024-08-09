@@ -239,6 +239,10 @@ select nfile_name, nfile_url from notice_file order by nidx desc limit #{page},#
 select * from notice where nidx=#{nidx}
 </select>
 
+<select id="notice_file_select_one" resultType="noticedto">
+select * from notice_file where nidx=#{nidx}
+</select>
+
 <update id="notice_count" parameterType="int">
 update notice set notice_count=notice_count+1 where nidx=#{nidx}
 </update>

@@ -55,5 +55,5 @@
         </div>
     </footer>
 </body>
-<script src="../resources/js/index.js?v=<%= System.currentTimeMillis() %>"></script>
+<script src="../resources/js/admin/index.js?v=<%= System.currentTimeMillis() %>"></script>
 </html>

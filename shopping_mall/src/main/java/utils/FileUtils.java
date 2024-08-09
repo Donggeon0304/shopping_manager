@@ -3,7 +3,6 @@ package utils;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +15,32 @@ import dto.ProductsDto;
 
 public class FileUtils {
 
+	public void deleteProductFiles(List<ProductsDto> dto,HttpServletRequest req) {
+		for(ProductsDto a : dto) {
+			String fu = a.getMfile_url();
+			int ind = fu.lastIndexOf("/");
+			String url = req.getServletContext().getRealPath("/upload/")+fu.substring(ind+1);
+			File file1 = new File(url);
+			File file2 = new File(a.getFile1_url());
+			File file3 = new File(a.getFile2_url());
+			file1.delete();
+			file2.delete();
+			file3.delete();
+		}
+	}
+	
+	public void deleteNoticeFile(List<NoticeDto> dto,HttpServletRequest req) {
+		for(NoticeDto a : dto) {
+			String fu = a.getNfile_url();
+			if(!fu.equals("")) {
+				int ind = fu.lastIndexOf("/");
+				String url = req.getServletContext().getRealPath("/upload/")+fu.substring(ind+1);
+				File file = new File(url);
+				file.delete();
+			}
+		}
+	}
+	
 	public ProductsDto file_url(ProductsDto dto,HttpServletRequest req) throws IOException {
 		MultipartFile mfile = dto.getPfile();
 		MultipartFile file1 = dto.getPadd_file1();

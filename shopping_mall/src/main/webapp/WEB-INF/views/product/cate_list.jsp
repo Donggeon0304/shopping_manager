@@ -56,5 +56,5 @@
 </main>
 <%@include file="../copyright.jsp" %>
 </body>
-<script src="../resources/js/cate_list.js?v=<%= System.currentTimeMillis() %>"></script>
+<script src="../resources/js/product/cate_list.js?v=<%= System.currentTimeMillis() %>"></script>
 </html>

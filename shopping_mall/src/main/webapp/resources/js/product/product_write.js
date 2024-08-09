@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded",function(){
 			alert('할인율을 입력하세요.');
 		}else if(frm.pstock.value == ""){
 			alert('상품재고를 입력하세요.');
-		}else if(pfile.value.value == ""){
+		}else if(pfile.value == ""){
 			alert('대표 이미지는 필수입니다.');
 		}else if(frm.ptext.value == ""){
 			alert('상품 상세설명을 입력하세요.');

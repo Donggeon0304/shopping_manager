@@ -23,7 +23,7 @@
 <main class="maincss">
 <section>
 <p>상품 등록 페이지</p>
-<form id="frm" enctype="multipart/form-data">
+<form id="frm">
 <div class="product_insert">
     <ul>
         <li>대메뉴 카테고리</li>
@@ -136,5 +136,5 @@
 </main>
 <%@include file="../copyright.jsp" %>
 </body>
-<script src="../resources/js/product_write.js?v=<%= System.currentTimeMillis() %>"></script>
+<script src="../resources/js/product/product_write.js?v=<%= System.currentTimeMillis() %>"></script>
 </html>

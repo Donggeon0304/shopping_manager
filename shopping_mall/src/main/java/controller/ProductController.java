@@ -134,8 +134,7 @@ public class ProductController {
 	//상품 등록
 	@PostMapping("product_add.do")
 	@ResponseBody
-	public String product_add(@ModelAttribute ProductsDto pt, HttpServletRequest req) throws IOException {
-		pt.setCidx(cs.get_cidx(pt.getCate()));
+	public String product_add(ProductsDto pt, HttpServletRequest req) throws IOException {
 		boolean addResult = ps.add_products(pt);
 		if(addResult) {
 			pt.setPidx(ps.get_pidx());

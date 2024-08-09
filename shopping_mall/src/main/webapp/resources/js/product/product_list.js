@@ -36,6 +36,14 @@ document.addEventListener("DOMContentLoaded",function(){
 	window.paging = function(page){
 		products(page,part,word);
 	}
+	window.openPopup = function(url) {
+            window.open(url, 'popupWindow', 'width=600,height=400,scrollbars=yes');
+            return false
+        }
+	window.modify = function(idx) {
+            alert('수정은 아직 미구현 기능입니다.')
+            return false;
+        }
 	
 	//db 데이터 받기
 	var size = 5; //출력 데이터 갯수
@@ -104,23 +112,25 @@ document.addEventListener("DOMContentLoaded",function(){
 					var second = pagehtml.children[f+1];
 					pagehtml.insertBefore(li,second);
 				}
+				//<li>${files ? `<img src="${c[f].mfile_url}" title="${c[f].mfile_name}" alt="${c[f].mfile_name}" width="50" height="50">` : `없음`}</li>
 				//상품 리스트
 				for(var f=0; f<a.length; f++){
+					var files = c[f];
 					var ul = document.createElement("ul");
 					ul.innerHTML += `
-					<li><input type="checkbox" class="ck" name="ck" data-del="${a[f].pidx}"></li>
-			        <li>${a[f].pcode}</li>
-			        <li><img src="${c[f].mfile_url}" title="${c[f].mfile_name}" alt="${c[f].mfile_name}" width="50" height="50"></li>
-			        <li>${a[f].pname}</li>
-			        <li>${a[f].cate}</li>
-			        <li>${a[f].price}</li>
-			        <li>${a[f].pdc_price}</li>
-			        <li>${a[f].pdc_per}%</li>
-			        <li>${a[f].pstock}</li>
-			        <li>${a[f].puse}</li>
-			        <li>${a[f].psold_out}</li>
-			        <li><input type="button" value="수정" id="mod"></li>
-					`;
+						<li><input type="checkbox" class="ck" name="ck" data-del="${a[f].pidx}"></li>
+				        <li>${a[f].pcode}</li>
+						<li>${files ? `<a href="${c[f].mfile_url}" target="_blank" style="text-decoration: none; color: blue; font-weight: bold;" onclick="return openPopup(this.href)"; title="${c[f].mfile_name}";>첨부파일</a>` : `없음`}</li>
+				        <li>${a[f].pname}</li>
+				        <li>${a[f].cate}</li>
+				        <li>${a[f].price}</li>
+				        <li>${a[f].pdc_price}</li>
+				        <li>${a[f].pdc_per}%</li>
+				        <li>${a[f].pstock}</li>
+				        <li>${a[f].puse}</li>
+				        <li>${a[f].psold_out}</li>
+				        <li><a style="color:brown;" onclick="modify(${a[f].pidx})">수정</a></li>
+						`;
 					pl.appendChild(ul);
 				}
 			}

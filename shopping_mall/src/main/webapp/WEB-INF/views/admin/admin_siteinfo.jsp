@@ -195,5 +195,5 @@
 
 <%@include file="../copyright.jsp" %>
 </body>
-<script src="../resources/js/admin_siteinfo.js?v=<%= System.currentTimeMillis() %>"></script>
+<script src="../resources/js/admin/admin_siteinfo.js?v=<%= System.currentTimeMillis() %>"></script>
 </html>

@@ -36,7 +36,7 @@
 							<span><a href="#" target="_blank">전체보기</a></span>
 						</div>
 						<div class="agreement_box">
-							
+							${terms.use_terms}
 						</div>
 						
 					</div>
@@ -48,7 +48,7 @@
 							<span><a href="#" target="_blank">전체보기</a></span>
 						</div>
 						<div class="agreement_box">
-							
+							${terms.personal_terms}
 						</div>
 					</div>
 					<div class="important_check_box">

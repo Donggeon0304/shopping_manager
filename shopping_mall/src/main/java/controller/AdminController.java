@@ -26,9 +26,32 @@ public class AdminController {
 	@Autowired
 	private AdminService as;
 	
+	//이용약관 수정
+	@PostMapping("/use_terms")
+	public ResponseEntity<String> modifyUseTerms(@RequestParam("use_terms") String use_terms) {
+		System.out.println(use_terms);
+		if(as.useTerms(use_terms)) {
+			return ResponseEntity.ok("ok");			
+		}else {
+			return ResponseEntity.ok("no");
+		}
+	}
+	
+	//개인정보 약관 수정
+	@PostMapping("/personal_terms")
+	public ResponseEntity<String> modifyPersonalTerms(@RequestParam("personal_terms") String personal_terms) {
+		System.out.println(personal_terms);
+		if(as.personalTerms(personal_terms)) {
+			return ResponseEntity.ok("ok");			
+		}else {
+			return ResponseEntity.ok("no");
+		}
+	}
+	
 	//쇼핑몰 회원관리 페이지
 	@GetMapping("/shop_member_list.do")
-	public String shop_memeber_list() {
+	public String shop_memeber_list(Model m) {
+		m.addAttribute("terms",as.getTerms());
 		return "/admin/shop_member_list";
 	}
 	

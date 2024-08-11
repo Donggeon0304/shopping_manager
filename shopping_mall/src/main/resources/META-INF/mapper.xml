@@ -23,6 +23,17 @@ select * from shopping_admin order by aidx desc
 update shopping_admin set ause=#{ause} where aidx=#{aidx}
 </update>
 
+<update id="use_terms">
+update terms set use_terms=#{use_terms}
+</update>
+
+<update id="personal_terms">
+update terms set personal_terms=#{personal_terms} 
+</update>
+
+<select id="terms_select" resultType="termsdto">
+select * from terms
+</select>
 <!-- siteinfo-->
 <insert id="site_insert">
 insert into siteinfo values ('0',#{page_name},#{admin_email},#{point_use},#{join_point},#{join_level},#{com_name},#{business_num},#{ceo_name},#{ceo_tel},#{mob_num},#{vat_num},#{com_post},#{com_address},#{info_name},#{info_email})

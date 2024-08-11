@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dto.AdminDto;
+import dto.TermsDto;
 import mapper.ShoppingMapper;
 import utils.Md5Utils;
 
@@ -52,6 +53,21 @@ public class AdminService {
 		at.setAidx(aidx);
 		int result = mp.admin_update(at);
 		return result > 0 ? "ok" : "no";
+	}
+	
+	//이용약관 수정
+	public boolean useTerms(String use_terms) {
+		return mp.use_terms(use_terms)>0;
+	}
+	
+	//개인정보 약관 수정
+	public boolean personalTerms(String personal_terms) {
+		return mp.personal_terms(personal_terms)>0;
+	}
+	
+	//약관정보 데이터
+	public TermsDto getTerms() {
+		return mp.terms_select();
 	}
 	
 }

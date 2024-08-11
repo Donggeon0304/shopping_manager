@@ -12,6 +12,7 @@ import dto.NoticeDto;
 import dto.PayInfoDto;
 import dto.ProductsDto;
 import dto.SiteInfoDto;
+import dto.TermsDto;
 
 @Mapper
 public interface ShoppingMapper {
@@ -21,6 +22,10 @@ public interface ShoppingMapper {
 	int admin_idcheck(String aid);
 	List<AdminDto> admin_select();
 	int admin_update(AdminDto dto);
+	int use_terms(@Param("use_terms") String use_terms);
+	int personal_terms(@Param("personal_terms") String personal_terms);
+	TermsDto terms_select();
+	
 	
 	//siteinfo
     int site_insert(SiteInfoDto dto);

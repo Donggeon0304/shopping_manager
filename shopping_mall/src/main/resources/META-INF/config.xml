@@ -5,6 +5,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="admindto" type="dto.AdminDto"/>
+		<typeAlias alias="termsdto" type="dto.TermsDto"/>
 		<typeAlias alias="siteinfodto" type="dto.SiteInfoDto"/>
 		<typeAlias alias="paydto" type="dto.PayInfoDto"/>
 		<typeAlias alias="sitepaydto" type="dto.SitePayDto"/>

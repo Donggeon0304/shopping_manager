@@ -1,0 +1,15 @@
+create table pay(
+pidx int(5) not null auto_increment,
+bank varchar(30) null,
+account_num varchar(30) null,
+card_use varchar(1) not null,
+phone_use varchar(1) not null,
+giftcard_user varchar(1) not null,
+min_point int(5) not null,
+man_point int(6) not null,
+cash_receipt varchar(1) not null,
+deli_name varchar(30) not null,
+deli_price varchar(5) not null,
+deli_date varchar(1) not null,
+primary key(pidx)
+);

@@ -29,7 +29,6 @@ public class AdminController {
 	//이용약관 수정
 	@PostMapping("/use_terms")
 	public ResponseEntity<String> modifyUseTerms(@RequestParam("use_terms") String use_terms) {
-		System.out.println(use_terms);
 		if(as.useTerms(use_terms)) {
 			return ResponseEntity.ok("ok");			
 		}else {
@@ -40,7 +39,6 @@ public class AdminController {
 	//개인정보 약관 수정
 	@PostMapping("/personal_terms")
 	public ResponseEntity<String> modifyPersonalTerms(@RequestParam("personal_terms") String personal_terms) {
-		System.out.println(personal_terms);
 		if(as.personalTerms(personal_terms)) {
 			return ResponseEntity.ok("ok");			
 		}else {

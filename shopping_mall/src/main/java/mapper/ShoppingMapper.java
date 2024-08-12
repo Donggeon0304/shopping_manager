@@ -13,6 +13,7 @@ import dto.PayInfoDto;
 import dto.ProductsDto;
 import dto.SiteInfoDto;
 import dto.TermsDto;
+import dto.UserDto;
 
 @Mapper
 public interface ShoppingMapper {
@@ -79,4 +80,8 @@ public interface ShoppingMapper {
     int notice_count(int nidx);
     int notice_delete(List<String> list);
     int notice_file_delete(List<String> list);
+    
+    //user
+    int user_select_id(@Param("user_id") String user_id);
+    int user_insert(UserDto dto);
 }

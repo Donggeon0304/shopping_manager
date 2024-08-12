@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="admindto" type="dto.AdminDto"/>
+		<typeAlias alias="termsdto" type="dto.TermsDto"/>
+		<typeAlias alias="siteinfodto" type="dto.SiteInfoDto"/>
+		<typeAlias alias="paydto" type="dto.PayInfoDto"/>
+		<typeAlias alias="sitepaydto" type="dto.SitePayDto"/>
+		<typeAlias alias="catedto" type="dto.CateDto"/>
+		<typeAlias alias="productsdto" type="dto.ProductsDto"/>
+		<typeAlias alias="products" type="model.Products"/>
+		<typeAlias alias="productfile" type="model.ProductFile"/>
+		<typeAlias alias="noticedto" type="dto.NoticeDto"/>
+	</typeAliases>
+</configuration>

@@ -1,0 +1,4 @@
+create table terms(
+use_terms text not null,
+personal_terms text not null
+);

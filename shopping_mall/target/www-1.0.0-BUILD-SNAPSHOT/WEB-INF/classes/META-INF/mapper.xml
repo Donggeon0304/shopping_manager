@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.ShoppingMapper">
+
+<!-- shopping_admin -->
+<insert id="admin_insert">
+insert into shopping_admin values ('0',#{aid},#{apass},#{aname},#{aemail},#{atel},#{ateam},#{aposition},#{ause},now())
+</insert>
+
+<select id="admin_selectOne" resultType="admindto">
+select * from shopping_admin where aid = #{aid}
+</select>
+
+<select id="admin_idcheck" resultType="int">
+select count(*) from shopping_admin where aid=#{param1}
+</select>
+
+<select id="admin_select" resultType="admindto">
+select * from shopping_admin order by aidx desc
+</select>
+
+<update id="admin_update">
+update shopping_admin set ause=#{ause} where aidx=#{aidx}
+</update>
+
+<update id="use_terms">
+update terms set use_terms=#{use_terms}
+</update>
+
+<update id="personal_terms">
+update terms set personal_terms=#{personal_terms} 
+</update>
+
+<select id="terms_select" resultType="termsdto">
+select * from terms
+</select>
+<!-- siteinfo-->
+<insert id="site_insert">
+insert into siteinfo values ('0',#{page_name},#{admin_email},#{point_use},#{join_point},#{join_level},#{com_name},#{business_num},#{ceo_name},#{ceo_tel},#{mob_num},#{vat_num},#{com_post},#{com_address},#{info_name},#{info_email})
+</insert>
+
+<select id="site_select" resultType="siteinfodto">
+select * from siteinfo
+</select>
+
+<select id="site_selectOne" resultType="int">
+select count(*) from siteinfo
+</select>
+
+<update id="site_update">
+update siteinfo set 
+page_name=#{page_name}, admin_email=#{admin_email}, point_use=#{point_use}, join_point=#{join_point}, 
+join_level=#{join_level}, com_name=#{com_name}, business_num=#{business_num}, ceo_name=#{ceo_name}, 
+ceo_tel=#{ceo_tel}, mob_num=#{mob_num}, vat_num=#{vat_num}, com_post=#{com_post}, com_address=#{com_address}, 
+info_name=#{info_name}, info_email=#{info_email}
+</update>
+
+<!-- pay -->
+<insert id="pay_insert">
+insert into pay values ('0',#{bank},#{account_num},#{card_use},#{phone_use},#{giftcard_use},#{min_point},#{max_point},#{cash_receipt},#{deli_name},#{deli_price},#{deli_date})
+</insert>
+
+<select id="pay_select" resultType="paydto">
+select * from pay
+</select>
+
+<update id="pay_update">
+update pay set 
+bank=#{bank}, account_num=#{account_num}, card_use=#{card_use}, phone_use=#{phone_use}, giftcard_use=#{giftcard_use}, 
+min_point=#{min_point}, max_point=#{max_point}, cash_receipt=#{cash_receipt}, deli_name=#{deli_name}, deli_price=#{deli_price}, deli_date=#{deli_date}
+</update>
+
+<!-- category -->
+<insert id="cate_insert">
+insert into category values ('0',#{cf_code},#{lm_code},#{lm_name},#{cuse},now())
+</insert>
+
+<select id="cate_select" resultType="catedto">
+select * from category order by cidx desc
+</select>
+
+<select id="cate_select_page" resultType="catedto">
+select * from category order by cidx desc limit #{page},#{size}
+</select>
+
+<select id="cate_search" resultType="catedto" parameterType="map">
+select * from category
+<where>
+	<if test="search_part==1">
+		lm_name like concat('%',#{search_word},'%')
+	</if>
+	<if test="search_part==2">
+		lm_code like concat('%',#{search_word},'%')
+	</if>
+</where>
+order by cidx desc limit #{page},#{size}
+</select>
+
+<select id="cate_ck_search" resultType="int" parameterType="map">
+select count(*) from category
+<where>
+	<if test="search_part==1">
+		lm_name like concat('%',#{search_word},'%')
+	</if>
+	<if test="search_part==2">
+		lm_code like concat('%',#{search_word},'%')
+	</if>
+</where>
+</select>
+
+<delete id="cate_delete" parameterType="list">
+delete from category
+where cidx in
+<foreach item="cidx" collection="list" open="(" separator="," close=")">
+	#{cidx}
+</foreach>
+</delete>
+
+<select id="cate_selectCidx" resultType="int">
+select cidx from category where lm_name=#{cate}
+</select>
+
+<select id="cate_ck" resultType="int">
+select count(*) from category
+</select>
+
+<!-- products -->
+<insert id="products_insert">
+insert into products values ('0',#{cidx},#{cate},#{pcode},#{pname},#{padd_text},#{price},#{pdc_per},#{pdc_price},#{pstock},#{puse},#{psold_out},#{ptext},now())
+</insert>
+
+<select id="products_codeck" resultType="int">
+select count(*) from products where pcode=#{pcode}
+</select>
+
+<select id="products_cateck" resultType="int">
+select count(*) from products where cidx=#{cidx}
+</select>
+
+<insert id="product_file_insert">
+insert into product_file values ('0',#{pidx},#{mfile_name},#{mfile_url},#{file1_name},#{file1_url},#{file2_name},#{file2_url})
+</insert>
+
+<select id="products_pidx" resultType="int">
+select pidx from products order by pidx desc limit 1
+</select>
+
+<select id="products_select" resultType="productsdto">
+select * from products order by pidx desc
+</select>
+
+<select id="products_select_page" resultType="productsdto">
+select * from products order by pidx desc limit #{page},#{size}
+</select>
+
+<select id="product_file_select_page" resultType="productsdto">
+select mfile_name, mfile_url from product_file order by pidx desc limit #{page},#{size}
+</select>
+
+<select id="products_ck" resultType="int">
+select count(*) from products
+</select>
+
+<select id="products_search" resultType="productsdto" parameterType="map">
+select * from products
+<where>
+	<if test="search_part==1">
+		pname like concat('%',#{search_word},'%')
+	</if>
+	<if test="search_part==2">
+		pcode like concat('%',#{search_word},'%')
+	</if>
+	<if test="search_part==3">
+		cate like concat('%',#{search_word},'%')
+	</if>
+</where>
+order by pidx desc limit #{page},#{size}
+</select>
+
+<select id="products_ck_search" resultType="int" parameterType="map">
+select count(*) from products
+<where>
+	<if test="search_part==1">
+		pname like concat('%',#{search_word},'%')
+	</if>
+	<if test="search_part==2">
+		pcode like concat('%',#{search_word},'%')
+	</if>
+	<if test="search_part==3">
+		cate like concat('%',#{search_word},'%')
+	</if>
+</where>
+</select>
+
+<select id="product_file_select" resultType="productsdto">
+select * from product_file order by pidx desc
+</select>
+
+<select id="product_file_search" resultType="productsdto" parameterType="map">
+select * from product_file
+where pidx in
+<foreach item="pidx" collection="list" open="(" separator="," close=")">
+	#{pidx}
+</foreach>
+order by pidx desc limit #{page},#{size}
+</select>
+
+<delete id="products_delete" parameterType="list">
+delete from products
+where pidx in
+<foreach item="pidx" collection="list" open="(" separator="," close=")">
+	#{pidx}
+</foreach>
+</delete>
+
+<delete id="product_file_delete" parameterType="list">
+delete from product_file
+where pidx in
+<foreach item="pidx" collection="list" open="(" separator="," close=")">
+	#{pidx}
+</foreach>
+</delete>
+
+<!-- notice -->
+<insert id="notice_insert">
+insert into notice value ('0',#{notice_use},#{notice_title},#{notice_writer},#{notice_text},#{notice_count},now())
+</insert>
+
+<insert id="notice_file_insert">
+insert into notice_file value('0',#{nidx},#{nfile_name},#{nfile_url})
+</insert>
+
+<select id="notice_select_idx" resultType="int">
+select nidx from notice order by nidx desc limit 1
+</select>
+
+<select id="notice_ck" resultType="int">
+select count(*) from notice
+</select>
+
+<select id="notice_select" resultType="noticedto">
+select * from notice order by nidx desc limit #{page},#{size}
+</select>
+
+<select id="notice_file_select" resultType="noticedto">
+select nfile_name, nfile_url from notice_file order by nidx desc limit #{page},#{size}
+</select>
+
+<select id="notice_select_one" resultType="noticedto">
+select * from notice where nidx=#{nidx}
+</select>
+
+<select id="notice_file_select_one" resultType="noticedto">
+select * from notice_file where nidx=#{nidx}
+</select>
+
+<update id="notice_count" parameterType="int">
+update notice set notice_count=notice_count+1 where nidx=#{nidx}
+</update>
+
+<delete id="notice_delete" parameterType="list">
+delete from notice
+where nidx in
+<foreach item="nidx" collection="list" open="(" separator="," close=")">
+	#{nidx}
+</foreach>
+</delete>
+
+<delete id="notice_file_delete" parameterType="list">
+delete from notice_file
+where nidx in
+<foreach item="nidx" collection="list" open="(" separator="," close=")">
+	#{nidx}
+</foreach>
+</delete>
+</mapper>

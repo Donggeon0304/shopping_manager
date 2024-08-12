@@ -34,6 +34,7 @@ update terms set personal_terms=#{personal_terms}
 <select id="terms_select" resultType="termsdto">
 select * from terms
 </select>
+
 <!-- siteinfo-->
 <insert id="site_insert">
 insert into siteinfo values ('0',#{page_name},#{admin_email},#{point_use},#{join_point},#{join_level},#{com_name},#{business_num},#{ceo_name},#{ceo_tel},#{mob_num},#{vat_num},#{com_post},#{com_address},#{info_name},#{info_email})
@@ -273,4 +274,13 @@ where nidx in
 	#{nidx}
 </foreach>
 </delete>
+
+<!-- user -->
+<select id="user_select_id" resultType="int">
+select count(*) from user where user_id=#{user_id}
+</select>
+
+<insert id="user_insert">
+insert into user values ('0',#{user_id},#{user_password},#{user_name},#{user_email},#{user_tel},#{event_email},#{event_sms},#{user_use},now())
+</insert>
 </mapper>

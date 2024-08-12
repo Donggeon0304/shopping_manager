@@ -1,0 +1,11 @@
+create table product_file(
+idx int not null auto_increment primary key,
+pidx int(7) not null,
+mfile_name varchar(50) not null,
+mfile_url varchar(100) not null,
+file1_name varchar(50) null,
+file1_url varchar(100) null,
+file2_name varchar(50) null,
+file2_url varchar(100) null,
+foreign key(pidx) references products (pidx)
+);

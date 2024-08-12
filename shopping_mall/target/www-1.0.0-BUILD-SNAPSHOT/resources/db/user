@@ -1,0 +1,12 @@
+create table user(
+uidx int not null auto_increment primary key,
+user_id varchar(20) not null unique,
+user_password varchar(20) not null,
+user_name varchar(30) not null,
+user_email varchar(255) not null,
+user_tel varchar(20) not null,
+event_email varchar(1) not null,
+event_sms varchar(1) not null,
+user_use varchar(1) not null,
+join_date timestamp not null default current_timestamp
+);

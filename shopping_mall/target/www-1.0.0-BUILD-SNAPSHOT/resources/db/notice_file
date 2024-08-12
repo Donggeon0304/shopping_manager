@@ -1,0 +1,7 @@
+create table notice_file(
+idx int not null auto_increment primary key,
+nidx int not null, 
+nfile_name varchar(100) not null,
+nfile_url varchar(200) not null,
+foreign key(nidx) references notice (nidx)
+);

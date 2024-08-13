@@ -3,6 +3,7 @@ package controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +27,12 @@ public class MemberController {
 	@Autowired
 	private UserService us;
 	
+	//로그인 페이지
 	@GetMapping("/login")
-	public String login() {
+	public String login(HttpSession hs, Model m) {
+		if(hs.getAttribute("saveId") != null) {
+			m.addAttribute("saveId",hs.getAttribute("saveId"));
+		}
 		return "member/login";
 	}
 	@GetMapping("/join")
@@ -55,24 +60,40 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping("/join")
 	public String join(@ModelAttribute UserDto dto, HttpSession hs) {
-		System.out.println(dto.getEvent_email());
-		System.out.println(dto.getEvent_sms());
 		String sendedCode = (String)hs.getAttribute("code");
 		if(dto.getCode().equals(sendedCode)) {
-			dto.setUser_use("Y");
-			if(dto.getEvent_email() == null) {
-				dto.setEvent_email("");
-			}
-			if(dto.getEvent_sms() == null) {
-				dto.setEvent_sms("");
-			}
 			if(us.addUser(dto)) {
-				return "ok";			
+				return "ok";
 			}else {
 				return "fail";
 			}
 		}else {
 			return "no";
+		}
+	}
+	
+	//로그인
+	@GetMapping("/user_login")
+	public ResponseEntity<String> userLogin(
+			@RequestParam String id, 
+			@RequestParam String password, 
+			@RequestParam String idSave, 
+			HttpSession hs) {
+		UserDto dto = us.loginUser(id);
+		if(dto != null && dto.getUser_password().equals(password)) {
+			if(dto.getUser_use().equals("정상")) {
+				if(idSave.equals("Y")) {
+					hs.setAttribute("saveId", id);
+					hs.setMaxInactiveInterval(5 * 60);
+				}else {
+					hs.removeAttribute("saveId");
+				}
+				return ResponseEntity.ok("ok");
+			}else {
+				return ResponseEntity.ok("fail");
+			}
+		}else {
+			return ResponseEntity.ok("no");
 		}
 	}
 }

@@ -84,4 +84,7 @@ public interface ShoppingMapper {
     //user
     int user_select_id(@Param("user_id") String user_id);
     int user_insert(UserDto dto);
+    List<UserDto> user_select();
+    int user_update(@Param("user_use") String user_use, @Param("uidx") int uidx);
+    UserDto user_select_one(@Param("user_id") String user_id);
 }

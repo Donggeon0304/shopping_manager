@@ -15,16 +15,14 @@
     <div class="products">
       <h3>MEMBER_LOGIN</h3>
       <div class="sub_view">
-        
-
         <div class="loginview">
           <span class="member_l"></span>
           <span class="login">
-          <form>   
+          <form id="frm1">
           <table border="0" cellpadding="0" cellspacing="0" class="table_login">
           <tr>
           <td>
-          <input type="text" placeholder="아이디를 입력해주세요" class="id">
+          <input type="text" placeholder="아이디를 입력해주세요" class="id" name="id" value="${saveId}">
           </td>
           <td rowspan="2">
           <input type="submit" value="LOGIN" class="btn1">
@@ -32,13 +30,13 @@
           </tr>
           <tr>
           <td>
-          <input type="password" placeholder="패스워드를 입력해주세요" class="id">
+          <input type="password" placeholder="패스워드를 입력해주세요" class="id" name="password">
           </td>
           </tr>
           </table>
               
           <div class="check1">
-          <input type="checkbox" id="l"> <label for="l" class="label_login">아이디 저장</label>
+          <input type="checkbox" id="l" name="idSave" value="Y" ${saveId != null && saveId != '' ? 'checked' : '' }> <label for="l" class="label_login">아이디 저장</label>
           </div>
           </form>
           <ul class="btns_login">
@@ -70,7 +68,6 @@
           </form>
           </span>
       </div>
-
       </div>
     </div>
 </main>

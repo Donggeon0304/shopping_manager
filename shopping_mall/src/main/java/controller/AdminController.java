@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import dto.AdminDto;
 import service.AdminService;
+import service.UserService;
 import utils.Md5Utils;
 
 @Controller
@@ -25,6 +26,9 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService as;
+	
+	@Autowired
+	private UserService us;
 	
 	//이용약관 수정
 	@PostMapping("/use_terms")
@@ -49,8 +53,20 @@ public class AdminController {
 	//쇼핑몰 회원관리 페이지
 	@GetMapping("/shop_member_list.do")
 	public String shop_memeber_list(Model m) {
+		m.addAttribute("users",us.getUser());
 		m.addAttribute("terms",as.getTerms());
 		return "/admin/shop_member_list";
+	}
+	
+	//정지여부 변경
+	@ResponseBody
+	@GetMapping("/user_use")
+	public String userUse(String user_use, int uidx) {
+		if(us.modifyUser(user_use, uidx)) {
+			return "ok";			
+		}else {
+			return "no";
+		}
 	}
 	
 	//관리자 로그인

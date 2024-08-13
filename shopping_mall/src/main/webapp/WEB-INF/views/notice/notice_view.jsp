@@ -46,7 +46,7 @@
 <ul class="ul_height">
     <li>공지내용</li>
     <li>
-        <div class="notice_input3" style="overflow-y: auto;" name="notice_text">${notice.notice_text}</div>
+        <div class="notice_input3" style="overflow-y: auto;">${notice.notice_text}</div>
     </li>
 </ul>
 </div>

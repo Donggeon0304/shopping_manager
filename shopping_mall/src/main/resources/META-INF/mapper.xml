@@ -283,4 +283,16 @@ select count(*) from user where user_id=#{user_id}
 <insert id="user_insert">
 insert into user values ('0',#{user_id},#{user_password},#{user_name},#{user_email},#{user_tel},#{event_email},#{event_sms},#{user_use},now())
 </insert>
+
+<select id="user_select" resultType="userdto">
+select * from user order by uidx desc
+</select>
+
+<update id="user_update">
+update user set user_use=#{user_use} where uidx=#{uidx}
+</update>
+
+<select id="user_select_one" resultType="userdto">
+select user_password, user_use from user where user_id=#{user_id}
+</select>
 </mapper>

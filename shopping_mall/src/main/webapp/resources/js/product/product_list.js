@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded",function(){
 		location.href = './product_write.do';
 	})
 	document.querySelector(".p_button_color2").addEventListener("click",()=>{
-		location.href = './cate_list.do';
+		location.href = './cate_write.do';
 	})
 	
 	window.paging = function(page){

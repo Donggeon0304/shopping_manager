@@ -73,7 +73,7 @@ min_point=#{min_point}, max_point=#{max_point}, cash_receipt=#{cash_receipt}, de
 
 <!-- category -->
 <insert id="cate_insert">
-insert into category values ('0',#{cf_code},#{lm_code},#{lm_name},#{cuse},now())
+insert into category values ('0',#{cf_code},#{lm_code},#{lm_name},#{sm_code},#{sm_name},#{cuse},now())
 </insert>
 
 <select id="cate_select" resultType="catedto">
@@ -123,6 +123,10 @@ select cidx from category where lm_name=#{cate}
 
 <select id="cate_ck" resultType="int">
 select count(*) from category
+</select>
+
+<select id="cate_select_sm" resultType="String" parameterType="String">
+select sm_name from category where lm_name=#{lm_name}
 </select>
 
 <!-- products -->
@@ -265,6 +269,10 @@ where nidx in
 <foreach item="nidx" collection="list" open="(" separator="," close=")">
 	#{nidx}
 </foreach>
+</delete>
+
+<delete id="noticeViewDelete" parameterType="int">
+delete from notice where nidx=#{nidx}
 </delete>
 
 <delete id="notice_file_delete" parameterType="list">

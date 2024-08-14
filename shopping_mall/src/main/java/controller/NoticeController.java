@@ -92,4 +92,13 @@ public class NoticeController {
 			return ResponseEntity.ok("no");
 		}
 	}
+	//공지사항 하나 삭제
+	@GetMapping("notice_view_remove")
+	public ResponseEntity<String> noticeViewRemove(int nidx){
+		if(ns.deleteNoticeView(nidx)) {
+			return ResponseEntity.ok("ok");			
+		}else {
+			return ResponseEntity.ok("no");
+		}
+	}
 }

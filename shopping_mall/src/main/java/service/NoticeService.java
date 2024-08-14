@@ -69,4 +69,7 @@ public class NoticeService {
 		fu.deleteNoticeFile(file,req);
 		return mp.notice_file_delete(nidx) > 0;
 	}
+	public boolean deleteNoticeView(int nidx) {
+		return mp.noticeViewDelete(nidx) > 0;
+	}
 }

@@ -28,18 +28,27 @@
     <ul>
         <li>대메뉴 카테고리</li>
         <li>
-            <select class="product_input1" name="cate">
+            <select class="product_input1" name="cate" id="lm_cate">
             	<option value="">카테고리 선택</option>
             	<c:forEach var="cate" items="${category}">
-                <option value="${cate.lm_name}">${cate.lm_name}</option>
+                	<option value="${cate}">${cate}</option>
                 </c:forEach>
             </select><input type="button" value="카테고리 등록" title="카테고리 등록" class="product_btn"> <span class="help_text">※ 해당 카테고리가 없을 경우 신규 등록하시길 바랍니다.</span>
         </li>
     </ul>
     <ul>
+        <li>소메뉴 카테고리</li>
+        <li>
+            <select class="product_input1" name="sm_cate" id="sm_cate">
+            	<option value="">카테고리 선택</option>
+            </select>
+        </li>
+    </ul>
+    <ul>
         <li>상품코드</li>
         <li>
-            <input type="text" class="product_input1" id="rancode" name="pcode" maxlength="7"> 
+            <input type="text" class="product_input1" id="rancode" name="pcode" maxlength="7" readonly> 
+            <input type="button" value="코드생성" title="코드생성" class="product_btn" id="random_code">&nbsp;&nbsp;
             <input type="button" value="중복확인" title="중복확인" class="product_btn" id="redundancy_ck"> <span class="help_text">※ 상품코드는 절대 중복되지 않도록 합니다.</span>
         </li>
     </ul>

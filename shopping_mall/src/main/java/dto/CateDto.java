@@ -7,5 +7,5 @@ import lombok.Setter;
 @Setter
 public class CateDto {
 	private int cidx;
-	private String cf_code, lm_code, lm_name, cuse, cdate;
+	private String cf_code, lm_code, lm_name, sm_code, sm_name, cuse, cdate;
 }

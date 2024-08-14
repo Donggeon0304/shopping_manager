@@ -48,6 +48,7 @@ public interface ShoppingMapper {
     int cate_delete(List<String> list);
     int cate_selectCidx(String cate);
     int cate_ck();
+    List<String> cate_select_sm(String lm_name);
     
     //products
     int products_insert(ProductsDto dto);
@@ -68,6 +69,7 @@ public interface ShoppingMapper {
     List<ProductsDto> product_file_search(Map<String, Object> map);
     int product_file_delete(List<String> list);
     
+    
     //notice
     int notice_insert(NoticeDto dto);
     int notice_file_insert(NoticeDto dto);
@@ -79,6 +81,7 @@ public interface ShoppingMapper {
     NoticeDto notice_file_select_one(int nidx);
     int notice_count(int nidx);
     int notice_delete(List<String> list);
+    int noticeViewDelete(int nidx);
     int notice_file_delete(List<String> list);
     
     //user

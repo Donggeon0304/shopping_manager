@@ -29,6 +29,41 @@ document.addEventListener("DOMContentLoaded",function(){
 		})
 	})
 	
+	document.querySelector("#lm_cate").addEventListener("change",function(){
+		const lm_cate = this.value;
+		fetch('./lm_cate?lm_cate='+lm_cate,{
+			method:'GET'
+		})
+		.then(response => response.json())
+		.then(data => {
+			var sm_cate = document.getElementById("sm_cate");
+			
+			sm_cate.innerHTML = '';
+			var option = document.createElement("option");
+			option.value = "";
+			option.innerHTML = `카테고리 선택`
+			sm_cate.appendChild(option);
+			for(var f=0; f<data[0].length; f++){
+				if(data[0][f] !== '-'){
+					var option = document.createElement("option");
+					option.value = data[0][f];
+					option.innerHTML = `
+				        ${data[0][f]}
+					`;
+					sm_cate.appendChild(option);					
+				}
+			}
+			
+		})
+		.catch(error =>{
+			console.log(error);
+			alert('에러발생');
+		})
+	})
+	document.querySelector("#sm_cate").addEventListener("change",function(){
+		
+	})
+	
 	//할인율 입력시 할인가격 자동계산
 	document.querySelector("#pdc_per").addEventListener("keyup",function(){
 		var dcPer = parseFloat(this.value) || 0;
@@ -66,6 +101,9 @@ document.addEventListener("DOMContentLoaded",function(){
 	})
 	document.getElementById("padd_file2").addEventListener("change",function(event){
 		sizeCheck(event);
+	})
+	document.querySelector("#random_code").addEventListener("click",function(){
+		ran();
 	})
 	
 	//상품등록

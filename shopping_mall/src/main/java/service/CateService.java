@@ -18,6 +18,10 @@ public class CateService {
 	ShoppingMapper mp;
 	
 	public boolean add_cate(CateDto dto) {
+		if(dto.getSm_code() == null) {
+			dto.setSm_code("-");
+			dto.setSm_name("-");
+		}
 		return mp.cate_insert(dto) > 0;
 	}
 	
@@ -36,6 +40,10 @@ public class CateService {
 		map.put("search_part", search_part);
 		map.put("search_word", search_word);
 		return mp.cate_search(map);
+	}
+	
+	public List<String> get_sm_name(String lm_name){
+		return mp.cate_select_sm(lm_name);
 	}
 	
 	public int search_ck_cate(String search_part, String search_word) {

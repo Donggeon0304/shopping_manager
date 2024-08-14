@@ -125,10 +125,26 @@ public class ProductController {
 		res.getWriter().print(ja.toString());
 	}
 	
+	//상품 등록 페이지
 	@GetMapping("product_write.do")
 	public String product_write(Model m) {
-		m.addAttribute("category",cs.get_cate());
+		List<String> category = new ArrayList<String>();
+		for(CateDto a : cs.get_cate()) {
+			String name = a.getLm_name();
+			if(!category.contains(name) && a.getCuse().equals("Y")) {
+				category.add(name);
+			}
+		}
+		m.addAttribute("category",category);
 		return "/product/product_write";
+	}
+	
+	//소메뉴 카테고리
+	@GetMapping("lm_cate")
+	public void lm_cate(HttpServletResponse res, String lm_cate) throws Exception {
+		JSONArray ja = new JSONArray();
+		ja.put(cs.get_sm_name(lm_cate));
+		res.getWriter().print(ja.toString());
 	}
 	
 	//상품 등록

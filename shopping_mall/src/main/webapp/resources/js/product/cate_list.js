@@ -62,8 +62,8 @@ document.addEventListener("DOMContentLoaded",function(){
 		        <li>분류코드</li>
 		        <li>대메뉴 코드</li>
 		        <li>대메뉴명</li>
-		        <li>소메뉴 코드(사용안함)</li>
-		        <li>소메뉴명(사용안함)</li>
+		        <li>소메뉴 코드</li>
+		        <li>소메뉴명</li>
 		        <li>사용 유/무</li>
 		        <li>관리</li>
 			`;
@@ -105,8 +105,8 @@ document.addEventListener("DOMContentLoaded",function(){
 			        <li style="text-align: left; text-indent: 5px;">${a[f].cf_code}</li>
 				    <li>${a[f].lm_code}</li>
 			        <li style="text-align: left; text-indent: 5px;">${a[f].lm_name}</li>
-			        <li>-</li>
-			        <li>-</li>
+			        <li>${a[f].sm_code}</li>
+			        <li style="text-align: left; text-indent: 5px;">${a[f].sm_name}</li>
 			        <li>${a[f].cuse}</li>
 			        <li><button data-mod="${a[f].cidx}">수정</button></li>
 					`;

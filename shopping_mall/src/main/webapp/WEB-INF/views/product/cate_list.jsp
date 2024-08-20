@@ -22,7 +22,7 @@
 <%@ include file="../Qmenu.jsp" %>
 <main class="maincss">
 <section>    
-<p>카테고리관리 페이지</p>
+<p>카테고리 관리 페이지</p>
 <div class="subpage_view">
     <span id="cate_ea"></span>
     <form id="search">

@@ -49,7 +49,7 @@ $(document).ready(function(){
             $("#frm").find("[name]").each(function() {
                 formData[this.name] = $(this).val();
             });
-                
+            formData["atel"] = atel[0].value + atel[1].value + atel[2].value;
 			// JSON 문자열로 변환
             var jsonData = JSON.stringify(formData);
 			$.ajax({

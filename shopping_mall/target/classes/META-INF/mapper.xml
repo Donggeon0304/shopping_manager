@@ -131,7 +131,7 @@ select sm_name from category where lm_name=#{lm_name}
 
 <!-- products -->
 <insert id="products_insert">
-insert into products values ('0',#{cidx},#{cate},#{pcode},#{pname},#{padd_text},#{price},#{pdc_per},#{pdc_price},#{pstock},#{puse},#{psold_out},#{ptext},now())
+insert into products values ('0',#{cidx},#{cate},#{sm_cate},#{pcode},#{pname},#{padd_text},#{price},#{pdc_per},#{pdc_price},#{pstock},#{puse},#{psold_out},#{ptext},now())
 </insert>
 
 <select id="products_codeck" resultType="int">

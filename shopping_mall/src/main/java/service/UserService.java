@@ -23,7 +23,7 @@ public class UserService {
 	public boolean addUser(UserDto dto) {
 		String upass = new Md5Utils().md5_making(dto.getUser_password());
 		dto.setUser_password(upass);
-		dto.setUser_use("Y");
+		dto.setUser_use("정상");
 		if(dto.getEvent_email() == null) {
 			dto.setEvent_email("N");
 		}

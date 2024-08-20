@@ -114,6 +114,8 @@ public class AdminController {
 	@ResponseBody
 	public ResponseEntity<String> admin_join(@RequestBody AdminDto at) {
 		String result = as.add_admin(at);
+		System.out.println(at.getAtel());
+		System.out.println("에텔");
 		if(result.equals("success")) {
 			System.out.println("win");
 		}else {

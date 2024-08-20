@@ -27,6 +27,7 @@ public class AdminService {
 		String atel = at.getAtel();
 		atel = atel.replaceAll(",", "");
 		at.setAtel(atel);
+		System.out.println(at.getAtel());
 		at.setAuse("N");
 		int result = mp.admin_insert(at);
 		return result > 0 ? "success" : "fail";

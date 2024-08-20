@@ -59,6 +59,6 @@ $(function(){
     }
 
 	function goList(){
-		location.href="./main.do";
+		location.href="./admin_list.do";
 	}
 })

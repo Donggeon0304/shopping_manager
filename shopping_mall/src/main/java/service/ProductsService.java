@@ -19,6 +19,9 @@ public class ProductsService {
 	private ShoppingMapper mp;
 	
 	public boolean add_products(ProductsDto dto) {
+		if(dto.getSm_cate().equals("")) {
+			dto.setSm_cate("-");
+		}
 		return mp.products_insert(dto) > 0;
 	}
 	

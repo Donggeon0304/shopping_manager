@@ -17,6 +17,7 @@ import dto.UserDto;
 import service.AdminService;
 import service.MailService;
 import service.UserService;
+import utils.Md5Utils;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
@@ -80,7 +81,8 @@ public class MemberController {
 			@RequestParam String idSave, 
 			HttpSession hs) {
 		UserDto dto = us.loginUser(id);
-		if(dto != null && dto.getUser_password().equals(password)) {
+		Md5Utils md = new Md5Utils();
+		if(dto != null && dto.getUser_password().equals(md.md5_making(password))) {
 			if(dto.getUser_use().equals("정상")) {
 				if(idSave.equals("Y")) {
 					hs.setAttribute("saveId", id);

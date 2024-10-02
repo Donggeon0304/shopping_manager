@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../resources/css/basic.css">
     <link rel="stylesheet" type="text/css" href="../resources/css/login.css?v=1">
     <link rel="stylesheet" type="text/css" href="../resources/css/main.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/product.css?v=5">
+    <link rel="stylesheet" type="text/css" href="../resources/css/product.css?v=6">
     <link rel="icon" href="../resources/img/logo.png" sizes="128x128">
     <link rel="icon" href="../resources/img/logo.png" sizes="64x64">
     <link rel="icon" href="../resources/img/logo.png" sizes="32x32">

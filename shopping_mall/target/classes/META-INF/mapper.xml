@@ -159,7 +159,7 @@ select * from products order by pidx desc limit #{page},#{size}
 </select>
 
 <select id="product_file_select_page" resultType="productsdto">
-select mfile_name, mfile_url from product_file order by pidx desc limit #{page},#{size}
+select mfile_name, mfile_url, file1_name, file1_url, file2_name, file2_url from product_file order by pidx desc limit #{page},#{size}
 </select>
 
 <select id="products_ck" resultType="int">

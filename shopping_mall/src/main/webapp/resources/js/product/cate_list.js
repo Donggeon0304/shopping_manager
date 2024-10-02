@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded",function(){
 	}
 	
 	//db 데이터 받기
-	var size = 5; //출력 데이터 갯수
+	var size = 10; //출력 데이터 갯수
 	function categories(page,part,word){
 		fetch(`./cate_list_ajax?size=${size}&page=${page}&part=${part}&word=${word}`,{
 			method:'GET'

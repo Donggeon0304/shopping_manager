@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dto.AdminDto;
 import dto.NoticeDto;
 import mapper.ShoppingMapper;
 import utils.FileUtils;
@@ -71,5 +70,11 @@ public class NoticeService {
 	}
 	public boolean deleteNoticeView(int nidx) {
 		return mp.noticeViewDelete(nidx) > 0;
+	}
+	public boolean modifyNotice(NoticeDto dto) {
+		if(dto.getNotice_use() == null) {
+			dto.setNotice_use("N");
+		}
+		return mp.notice_update(dto) > 0;
 	}
 }

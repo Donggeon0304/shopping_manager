@@ -283,6 +283,10 @@ where nidx in
 </foreach>
 </delete>
 
+<update id="notice_update" parameterType="noticedto">
+update notice set notice_use=#{notice_use}, notice_title=#{notice_title}, notice_text=#{notice_text} where nidx=#{nidx}
+</update>
+
 <!-- user -->
 <select id="user_select_id" resultType="int">
 select count(*) from user where user_id=#{user_id}

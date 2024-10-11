@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import dto.NoticeDto;
@@ -65,11 +66,9 @@ public class NoticeController {
 			if(ns.addNoticeFile(dto,req)) {
 				return "ok";				
 			}else {
-				System.out.println("파일 저장실패");
 				return "no";
 			}
 		}else {
-			System.out.println("노티스 저장실패");
 			return "no";
 		}
 	}
@@ -86,7 +85,8 @@ public class NoticeController {
 	//공지사항 삭제
 	@PostMapping("notice_remove")
 	public ResponseEntity<String> notice_remove(@RequestBody List<String> nidx,HttpServletRequest req){
-		if(ns.deleteNoticeFile(nidx,req) && ns.deleteNotice(nidx)) {
+		if(ns.deleteNotice(nidx)) {
+			ns.deleteNoticeFile(nidx,req);
 			return ResponseEntity.ok("ok");			
 		}else{
 			return ResponseEntity.ok("no");
@@ -96,6 +96,26 @@ public class NoticeController {
 	@GetMapping("notice_view_remove")
 	public ResponseEntity<String> noticeViewRemove(int nidx){
 		if(ns.deleteNoticeView(nidx)) {
+			return ResponseEntity.ok("ok");			
+		}else {
+			return ResponseEntity.ok("no");
+		}
+	}
+	
+	//공지사항 수정 페이지
+	@GetMapping("notice_modify")
+	public String noticeModify(@RequestParam int nidx, Model m) {
+		ns.countNoticeView(nidx);
+		m.addAttribute("notice",ns.getNoticeOne(nidx));
+		m.addAttribute("notice_file",ns.getNoticeFileOne(nidx));
+		return "notice/notice_modify";
+	}
+	
+	//공지사항 수정
+	@PostMapping("notice_modify")
+	public ResponseEntity<String> noticeModifying(@RequestParam int nidx, NoticeDto dto){
+		dto.setIdx(nidx);
+		if(ns.modifyNotice(dto)) {
 			return ResponseEntity.ok("ok");			
 		}else {
 			return ResponseEntity.ok("no");

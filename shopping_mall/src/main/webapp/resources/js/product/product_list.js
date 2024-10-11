@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		        <li>재고현황</li>
 		        <li>판매유/무</li>
 		        <li>품절</li>
-		        <li>관리</li>
+		        <li>비고</li>
 			`;
 				pl.appendChild(ul2);
 
@@ -153,10 +153,11 @@ document.addEventListener("DOMContentLoaded", function() {
 				        <li>${a[f].pstock}</li>
 				        <li>${a[f].puse}</li>
 				        <li>${a[f].psold_out}</li>
-				        <li><a style="color:brown;" onclick="modify(${a[f].pidx})">수정</a></li>
+				        <li>-</li>
 						`;
 						pl.appendChild(ul);
 					}
+					//<li><a style="color:brown;" onclick="modify(${a[f].pidx})">수정</a></li>
 				}
 				initializeEventListeners();
 				history.replaceState({}, '', location.pathname + `?page=${page}&part=${part}&word=${word}`);

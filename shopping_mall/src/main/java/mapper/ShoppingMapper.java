@@ -83,6 +83,7 @@ public interface ShoppingMapper {
     int notice_delete(List<String> list);
     int noticeViewDelete(int nidx);
     int notice_file_delete(List<String> list);
+    int notice_update(NoticeDto dto);
     
     //user
     int user_select_id(@Param("user_id") String user_id);

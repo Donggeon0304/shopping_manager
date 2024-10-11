@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded",function(){
 		        <li>소메뉴 코드</li>
 		        <li>소메뉴명</li>
 		        <li>사용 유/무</li>
-		        <li>관리</li>
+		        <li>비고</li>
 			`;
 			cl.appendChild(ul2);
 			
@@ -108,9 +108,10 @@ document.addEventListener("DOMContentLoaded",function(){
 			        <li>${a[f].sm_code}</li>
 			        <li style="text-align: left; text-indent: 5px;">${a[f].sm_name}</li>
 			        <li>${a[f].cuse}</li>
-			        <li><button data-mod="${a[f].cidx}">수정</button></li>
+			        <li>-</li>
 					`;
 					cl.appendChild(ul);
+					//<li><button data-mod="${a[f].cidx}">수정</button></li>
 				}
 			}
 			initializeEventListeners();

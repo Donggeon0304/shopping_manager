@@ -20,6 +20,7 @@
 <%@ include file="../top.jsp" %>
 <%@ include file="../Qmenu.jsp" %>
 <main class="maincss">
+<input type="hidden" id="nidx" value="${notice.nidx}">
 <section>
     <p>공지사항 확인 페이지</p>
 <div class="write_view">
@@ -53,7 +54,6 @@
 <div class="board_btn">
     <button class="border_del">공지목록</button>
     <button class="border_add">공지수정</button>
-    <button class="border_modify" style="margin-left: 8px;" data-del="${notice.nidx}">공지삭제</button>
 </div>
 </section>
 </main>

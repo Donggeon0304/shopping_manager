@@ -7,7 +7,11 @@ document.addEventListener("DOMContentLoaded",function(){
 		var page = localStorage.getItem("page");
 		location.href='./notice_list?page='+page;
 	})
-	document.querySelector(".border_modify").addEventListener("click",function(){
+	document.querySelector(".border_add").addEventListener("click",()=>{
+		const nidx = parseInt(document.getElementById("nidx").value);
+		location.href=`./notice_modify?nidx=${nidx}`;
+	})
+	/*document.querySelector(".border_modify").addEventListener("click",function(){
 		if(confirm('삭제하시면 복구가 되지 않습니다.\n정말 삭제하시겠습니까?')){
 			var nidx = this.getAttribute("data-del");
 			fetch("./notice_view_remove?nidx="+nidx,{
@@ -28,4 +32,5 @@ document.addEventListener("DOMContentLoaded",function(){
 			})			
 		}
 	})
+	*/
 })
